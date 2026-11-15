@@ -1,6 +1,6 @@
 # Agent Demonstration - Executed Results
 
-- **Run:** 2026-11-15 21:33:08
+- **Run:** 2026-11-16 00:03:17
 - **Ontology file:** `hospital_ontology.owl`
 - **Reasoner:** HermiT (owlready2)
 - **Result:** 38/38 checks passed
@@ -54,7 +54,7 @@ Each answer below was generated at runtime by querying the OWL graph. The *expec
 
 - **Category:** entity lookup
 - **Intent detected:** `individual_description` (confidence 0.99)
-- **Status:** PASS (3.109 s)
+- **Status:** PASS (7.096 s)
 - **Expected facts:** John Miller, P-1001, Type 2 Diabetes, Hypertension, O+, Dr. Alice Chen
 
 **Agent answer:**
@@ -94,7 +94,7 @@ http://example.org/hospital#p001 http://example.org/hospital#age 68
 
 - **Category:** entity lookup
 - **Intent detected:** `individual_description` (confidence 0.99)
-- **Status:** PASS (0.068 s)
+- **Status:** PASS (0.167 s)
 - **Expected facts:** Surgeon, Surgery, Appendicitis, James Taylor
 
 **Agent answer:**
@@ -132,7 +132,7 @@ http://example.org/hospital#d005 http://example.org/hospital#licenseNumber MD-10
 
 - **Category:** class query
 - **Intent detected:** `class_description` (confidence 0.98)
-- **Status:** PASS (0.082 s)
+- **Status:** PASS (0.205 s)
 - **Expected facts:** Cardiologist, Doctor, Dr. Rajesh Patel
 
 **Agent answer:**
@@ -145,7 +145,7 @@ http://example.org/hospital#d005 http://example.org/hospital#licenseNumber MD-10
 
 - **Category:** class query
 - **Intent detected:** `subclasses` (confidence 1.00)
-- **Status:** PASS (0.074 s)
+- **Status:** PASS (0.123 s)
 - **Expected facts:** Cardiologist, Surgeon, Neurologist, General Practitioner
 
 **Agent answer:**
@@ -173,7 +173,7 @@ SELECT ?c WHERE { ?c rdfs:subClassOf+ h:Doctor }
 
 - **Category:** class hierarchy
 - **Intent detected:** `subclass_check` (confidence 1.00)
-- **Status:** PASS (0.013 s)
+- **Status:** PASS (0.017 s)
 - **Expected facts:** Yes, Pneumonia, Disease
 
 **Agent answer:**
@@ -190,7 +190,7 @@ ASK { h:Pneumonia rdf:type/rdfs:subClassOf* h:Disease }
 
 - **Category:** class instances
 - **Intent detected:** `instances` (confidence 1.00)
-- **Status:** PASS (0.006 s)
+- **Status:** PASS (0.008 s)
 - **Expected facts:** Type 2 Diabetes, Asthma, COPD, Alzheimer's Disease
 
 **Agent answer:**
@@ -208,7 +208,7 @@ ASK { h:Pneumonia rdf:type/rdfs:subClassOf* h:Disease }
 
 - **Category:** relationship
 - **Intent detected:** `generic_relation` (confidence 0.90)
-- **Status:** PASS (0.194 s)
+- **Status:** PASS (0.398 s)
 - **Expected facts:** Robert Brown, Dr. Rajesh Patel
 
 **Agent answer:**
@@ -231,7 +231,7 @@ http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://ex
 
 - **Category:** relationship
 - **Intent detected:** `diseases_treated_by_doctor` (confidence 0.98)
-- **Status:** PASS (0.058 s)
+- **Status:** PASS (0.154 s)
 - **Expected facts:** Coronary Artery Disease, Hypertension
 
 **Agent answer:**
@@ -255,7 +255,7 @@ http://example.org/hospital#d002 http://example.org/hospital#treatsDisease http:
 
 - **Category:** relationship
 - **Intent detected:** `patients_of_doctor` (confidence 0.98)
-- **Status:** PASS (0.071 s)
+- **Status:** PASS (0.231 s)
 - **Expected facts:** Robert Brown
 
 **Agent answer:**
@@ -278,7 +278,7 @@ http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://ex
 
 - **Category:** attribute
 - **Intent detected:** `attribute` (confidence 0.98)
-- **Status:** PASS (0.087 s)
+- **Status:** PASS (0.101 s)
 - **Expected facts:** O+
 
 **Agent answer:**
@@ -301,7 +301,7 @@ http://example.org/hospital#p001 http://example.org/hospital#bloodGroup O+
 
 - **Category:** attribute
 - **Intent detected:** `attribute` (confidence 0.98)
-- **Status:** PASS (0.003 s)
+- **Status:** PASS (0.004 s)
 - **Expected facts:** 34
 
 **Agent answer:**
@@ -324,7 +324,7 @@ http://example.org/hospital#p002 http://example.org/hospital#age 34
 
 - **Category:** attribute
 - **Intent detected:** `attribute` (confidence 0.98)
-- **Status:** PASS (0.003 s)
+- **Status:** PASS (0.007 s)
 - **Expected facts:** MD-1002
 
 **Agent answer:**
@@ -347,7 +347,7 @@ http://example.org/hospital#d002 http://example.org/hospital#licenseNumber MD-10
 
 - **Category:** attribute
 - **Intent detected:** `attribute` (confidence 0.98)
-- **Status:** PASS (0.002 s)
+- **Status:** PASS (0.005 s)
 - **Expected facts:** 500 mg
 
 **Agent answer:**
@@ -393,7 +393,7 @@ http://example.org/hospital#apt001 http://example.org/hospital#cost 120.00
 
 - **Category:** multi-hop
 - **Intent detected:** `symptoms_from_patient_diseases` (confidence 0.97)
-- **Status:** PASS (0.016 s)
+- **Status:** PASS (0.018 s)
 - **Expected facts:** Excessive Thirst, Frequent Urination, Headache, Blurred Vision
 
 **Agent answer:**
@@ -421,7 +421,7 @@ http://example.org/hospital#Hypertension http://example.org/hospital#causes http
 
 - **Category:** multi-hop / transitive
 - **Intent detected:** `hospital_of_doctor` (confidence 0.98)
-- **Status:** PASS (0.057 s)
+- **Status:** PASS (0.107 s)
 - **Expected facts:** Cardiology, St. Mary's Hospital
 
 **Agent answer:**
@@ -445,7 +445,7 @@ http://example.org/hospital#d002 http://example.org/hospital#affiliatedWith http
 
 - **Category:** multi-hop / transitive
 - **Intent detected:** `generic_relation` (confidence 0.85)
-- **Status:** PASS (0.314 s)
+- **Status:** PASS (0.715 s)
 - **Expected facts:** St. Mary's Hospital
 
 **Agent answer:**
@@ -462,7 +462,7 @@ SELECT ?x WHERE { h:ward_cardio_icu h:partOf/h:partOf ?x . ?x rdf:type/rdfs:subC
 
 - **Category:** multi-hop
 - **Intent detected:** `workers_in_hospital` (confidence 0.97)
-- **Status:** PASS (0.092 s)
+- **Status:** PASS (0.201 s)
 - **Expected facts:** Dr. James Wilson
 
 **Agent answer:**
@@ -486,7 +486,7 @@ http://example.org/hospital#d010 http://example.org/hospital#worksIn http://exam
 
 - **Category:** multi-hop
 - **Intent detected:** `insurance_coverage` (confidence 0.97)
-- **Status:** PASS (0.077 s)
+- **Status:** PASS (0.118 s)
 - **Expected facts:** BlueCare, MediGold, Coronary Artery Disease
 
 **Agent answer:**
@@ -516,7 +516,7 @@ http://example.org/hospital#ins_bluecare http://example.org/hospital#coversDisea
 
 - **Category:** symmetric property
 - **Intent detected:** `drug_interactions` (confidence 0.98)
-- **Status:** PASS (0.054 s)
+- **Status:** PASS (0.187 s)
 - **Expected facts:** Warfarin
 
 **Agent answer:**
@@ -539,7 +539,7 @@ http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith ht
 
 - **Category:** multi-hop
 - **Intent detected:** `interactions_of_patient_meds` (confidence 0.97)
-- **Status:** PASS (0.061 s)
+- **Status:** PASS (0.145 s)
 - **Expected facts:** Warfarin, Aspirin
 
 **Agent answer:**
@@ -565,7 +565,7 @@ http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith ht
 
 - **Category:** inverse property
 - **Intent detected:** `head_of_department` (confidence 0.98)
-- **Status:** PASS (0.068 s)
+- **Status:** PASS (0.104 s)
 - **Expected facts:** Dr. Rajesh Patel
 
 **Agent answer:**
@@ -588,7 +588,7 @@ http://example.org/hospital#d002 http://example.org/hospital#headOf http://examp
 
 - **Category:** inverse property
 - **Intent detected:** `patients_by_specialty` (confidence 0.97)
-- **Status:** PASS (0.06 s)
+- **Status:** PASS (0.1 s)
 - **Expected facts:** Robert Brown, Henry Moore
 
 **Agent answer:**
@@ -612,7 +612,7 @@ http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://ex
 
 - **Category:** relationship
 - **Intent detected:** `patients_with_appointment` (confidence 0.97)
-- **Status:** PASS (0.065 s)
+- **Status:** PASS (0.085 s)
 - **Expected facts:** David Lee, Emma Wilson, Noah White
 
 **Agent answer:**
@@ -637,7 +637,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** aggregation
 - **Intent detected:** `count_instances` (confidence 1.00)
-- **Status:** PASS (0.066 s)
+- **Status:** PASS (0.095 s)
 - **Expected facts:** 12
 
 **Agent answer:**
@@ -648,7 +648,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** aggregation
 - **Intent detected:** `count_patients_with_disease` (confidence 0.95)
-- **Status:** PASS (0.02 s)
+- **Status:** PASS (0.026 s)
 - **Expected facts:** 2
 
 **Agent answer:**
@@ -659,7 +659,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** aggregation
 - **Intent detected:** `count_relation` (confidence 0.95)
-- **Status:** PASS (0.196 s)
+- **Status:** PASS (0.345 s)
 - **Expected facts:** 3, A-1003, A-1006, A-1012
 
 **Agent answer:**
@@ -670,7 +670,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** reasoning
 - **Intent detected:** `instances` (confidence 0.95)
-- **Status:** PASS (0.119 s)
+- **Status:** PASS (0.144 s)
 - **Expected facts:** John Miller, Robert Brown, William Thomas, inferred
 
 **Agent answer:**
@@ -684,7 +684,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** reasoning
 - **Intent detected:** `yes_no` (confidence 0.98)
-- **Status:** PASS (0.08 s)
+- **Status:** PASS (0.137 s)
 - **Expected facts:** Yes, Senior Patient
 
 **Agent answer:**
@@ -695,7 +695,7 @@ http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http
 
 - **Category:** superlative
 - **Intent detected:** `superlative` (confidence 1.00)
-- **Status:** PASS (0.059 s)
+- **Status:** PASS (0.149 s)
 - **Expected facts:** William Thomas, 80
 
 **Agent answer:**
@@ -718,7 +718,7 @@ http://example.org/hospital#p009 http://example.org/hospital#age 80
 
 - **Category:** relationship path
 - **Intent detected:** `relationship_between` (confidence 0.95)
-- **Status:** PASS (0.004 s)
+- **Status:** PASS (0.006 s)
 - **Expected facts:** relationship, treated by
 
 **Agent answer:**
@@ -731,7 +731,7 @@ http://example.org/hospital#p009 http://example.org/hospital#age 80
 
 - **Category:** attribute
 - **Intent detected:** `diseases_by_system` (confidence 0.98)
-- **Status:** PASS (0.066 s)
+- **Status:** PASS (0.118 s)
 - **Expected facts:** Asthma, Pneumonia, COPD, Influenza
 
 **Agent answer:**
@@ -757,7 +757,7 @@ http://example.org/hospital#COPD http://example.org/hospital#hasAffectedSystem h
 
 - **Category:** relationship
 - **Intent detected:** `patients_allergic` (confidence 0.98)
-- **Status:** PASS (0.064 s)
+- **Status:** PASS (0.093 s)
 - **Expected facts:** Sophia Martinez
 
 **Agent answer:**
@@ -780,7 +780,7 @@ http://example.org/hospital#p006 http://example.org/hospital#allergicTo http://e
 
 - **Category:** aggregation
 - **Intent detected:** `comorbidity_count` (confidence 0.98)
-- **Status:** PASS (0.071 s)
+- **Status:** PASS (0.103 s)
 - **Expected facts:** John Miller, Robert Brown, William Thomas
 
 **Agent answer:**
@@ -797,7 +797,7 @@ SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p
 
 - **Category:** schema
 - **Intent detected:** `list_object_properties` (confidence 1.00)
-- **Status:** PASS (0.051 s)
+- **Status:** PASS (0.14 s)
 - **Expected facts:** Object properties, diagnosed with, works in, interacts with
 
 **Agent answer:**
@@ -836,7 +836,7 @@ SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p
 
 - **Category:** unknown
 - **Intent detected:** `unknown` (confidence 0.00)
-- **Status:** PASS (0.005 s)
+- **Status:** PASS (0.007 s)
 - **Expected facts:** could not find an answer
 
 **Agent answer:**
@@ -849,7 +849,7 @@ SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p
 
 - **Category:** unknown
 - **Intent detected:** `unknown` (confidence 0.00)
-- **Status:** PASS (0.054 s)
+- **Status:** PASS (0.103 s)
 - **Expected facts:** could not find an answer
 
 **Agent answer:**
@@ -862,7 +862,7 @@ SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p
 
 - **Category:** unknown
 - **Intent detected:** `unknown` (confidence 0.00)
-- **Status:** PASS (0.056 s)
+- **Status:** PASS (0.081 s)
 - **Expected facts:** could not find an answer
 
 **Agent answer:**

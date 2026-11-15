@@ -26,7 +26,7 @@
       "http://example.org/hospital#p001 http://example.org/hospital#age 68"
     ],
     "sparql": "SELECT ?p ?o WHERE { h:p001 ?p ?o }",
-    "seconds": 3.109
+    "seconds": 7.096
   },
   {
     "id": 2,
@@ -53,7 +53,7 @@
       "http://example.org/hospital#d005 http://example.org/hospital#licenseNumber MD-1005"
     ],
     "sparql": "SELECT ?p ?o WHERE { h:d005 ?p ?o }",
-    "seconds": 0.068
+    "seconds": 0.167
   },
   {
     "id": 3,
@@ -72,7 +72,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.082
+    "seconds": 0.205
   },
   {
     "id": 4,
@@ -92,7 +92,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": "SELECT ?c WHERE { ?c rdfs:subClassOf+ h:Doctor }",
-    "seconds": 0.074
+    "seconds": 0.123
   },
   {
     "id": 5,
@@ -111,7 +111,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": "ASK { h:Pneumonia rdf:type/rdfs:subClassOf* h:Disease }",
-    "seconds": 0.013
+    "seconds": 0.017
   },
   {
     "id": 6,
@@ -131,7 +131,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.006
+    "seconds": 0.008
   },
   {
     "id": 7,
@@ -151,7 +151,7 @@
       "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
     ],
     "sparql": "SELECT ?o WHERE { h:p003 h:treatedBy ?o }",
-    "seconds": 0.194
+    "seconds": 0.398
   },
   {
     "id": 8,
@@ -172,7 +172,7 @@
       "http://example.org/hospital#d002 http://example.org/hospital#treatsDisease http://example.org/hospital#Hypertension"
     ],
     "sparql": "SELECT ?d WHERE { h:d002 h:treatsDisease ?d }",
-    "seconds": 0.058
+    "seconds": 0.154
   },
   {
     "id": 9,
@@ -191,7 +191,7 @@
       "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
     ],
     "sparql": "SELECT ?p WHERE { ?p h:treatedBy h:d002 }",
-    "seconds": 0.071
+    "seconds": 0.231
   },
   {
     "id": 10,
@@ -210,7 +210,7 @@
       "http://example.org/hospital#p001 http://example.org/hospital#bloodGroup O+"
     ],
     "sparql": "SELECT ?v WHERE { h:p001 h:bloodGroup ?v }",
-    "seconds": 0.087
+    "seconds": 0.101
   },
   {
     "id": 11,
@@ -229,7 +229,7 @@
       "http://example.org/hospital#p002 http://example.org/hospital#age 34"
     ],
     "sparql": "SELECT ?v WHERE { h:p002 h:age ?v }",
-    "seconds": 0.003
+    "seconds": 0.004
   },
   {
     "id": 12,
@@ -248,7 +248,7 @@
       "http://example.org/hospital#d002 http://example.org/hospital#licenseNumber MD-1002"
     ],
     "sparql": "SELECT ?v WHERE { h:d002 h:licenseNumber ?v }",
-    "seconds": 0.003
+    "seconds": 0.007
   },
   {
     "id": 13,
@@ -267,7 +267,7 @@
       "http://example.org/hospital#Metformin http://example.org/hospital#dosage 500 mg"
     ],
     "sparql": "SELECT ?v WHERE { h:Metformin h:dosage ?v }",
-    "seconds": 0.002
+    "seconds": 0.005
   },
   {
     "id": 14,
@@ -313,7 +313,7 @@
       "http://example.org/hospital#Hypertension http://example.org/hospital#causes http://example.org/hospital#Headache"
     ],
     "sparql": "SELECT DISTINCT ?s WHERE { h:p001 h:diagnosedWith ?d . ?d h:causes ?s }",
-    "seconds": 0.016
+    "seconds": 0.018
   },
   {
     "id": 16,
@@ -334,7 +334,7 @@
       "http://example.org/hospital#d002 http://example.org/hospital#affiliatedWith http://example.org/hospital#hosp_stmary"
     ],
     "sparql": "SELECT ?h WHERE { h:d002 h:worksIn/h:partOf ?h . ?h rdf:type/rdfs:subClassOf* h:Hospital }",
-    "seconds": 0.057
+    "seconds": 0.107
   },
   {
     "id": 17,
@@ -351,7 +351,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": "SELECT ?x WHERE { h:ward_cardio_icu h:partOf/h:partOf ?x . ?x rdf:type/rdfs:subClassOf* h:Hospital }",
-    "seconds": 0.314
+    "seconds": 0.715
   },
   {
     "id": 18,
@@ -371,7 +371,7 @@
       "http://example.org/hospital#d010 http://example.org/hospital#worksIn http://example.org/hospital#dept_cardio_city"
     ],
     "sparql": "SELECT DISTINCT ?w WHERE { ?d h:partOf h:hosp_city . ?w h:worksIn ?d }",
-    "seconds": 0.092
+    "seconds": 0.201
   },
   {
     "id": 19,
@@ -395,7 +395,7 @@
       "http://example.org/hospital#ins_bluecare http://example.org/hospital#coversDisease http://example.org/hospital#Hypertension"
     ],
     "sparql": "SELECT ?plan ?d WHERE { h:p003 h:diagnosedWith ?d . ?plan h:coversDisease ?d }",
-    "seconds": 0.077
+    "seconds": 0.118
   },
   {
     "id": 20,
@@ -414,7 +414,7 @@
       "http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith http://example.org/hospital#Warfarin"
     ],
     "sparql": "SELECT ?o WHERE { { h:Aspirin h:interactsWith ?o } UNION { ?o h:interactsWith h:Aspirin } }",
-    "seconds": 0.054
+    "seconds": 0.187
   },
   {
     "id": 21,
@@ -434,7 +434,7 @@
       "http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith http://example.org/hospital#Warfarin"
     ],
     "sparql": "SELECT ?m ?o WHERE { ?m h:prescribedFor h:p003 . { ?m h:interactsWith ?o } UNION { ?o h:interactsWith ?m } }",
-    "seconds": 0.061
+    "seconds": 0.145
   },
   {
     "id": 22,
@@ -453,7 +453,7 @@
       "http://example.org/hospital#d002 http://example.org/hospital#headOf http://example.org/hospital#dept_cardio"
     ],
     "sparql": "SELECT ?d WHERE { ?d h:headOf h:dept_cardio }",
-    "seconds": 0.068
+    "seconds": 0.104
   },
   {
     "id": 23,
@@ -474,7 +474,7 @@
       "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
     ],
     "sparql": "SELECT DISTINCT ?p WHERE { ?p h:treatedBy ?d . ?d rdf:type/rdfs:subClassOf* h:Cardiologist }",
-    "seconds": 0.06
+    "seconds": 0.1
   },
   {
     "id": 24,
@@ -497,7 +497,7 @@
       "http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http://example.org/hospital#apt006"
     ],
     "sparql": "SELECT DISTINCT ?p WHERE { ?a h:withDoctor h:d004 . ?a h:forPatient ?p }",
-    "seconds": 0.065
+    "seconds": 0.085
   },
   {
     "id": 25,
@@ -514,7 +514,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.066
+    "seconds": 0.095
   },
   {
     "id": 26,
@@ -531,7 +531,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.02
+    "seconds": 0.026
   },
   {
     "id": 27,
@@ -551,7 +551,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.196
+    "seconds": 0.345
   },
   {
     "id": 28,
@@ -571,7 +571,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.119
+    "seconds": 0.144
   },
   {
     "id": 29,
@@ -589,7 +589,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.08
+    "seconds": 0.137
   },
   {
     "id": 30,
@@ -609,7 +609,7 @@
       "http://example.org/hospital#p009 http://example.org/hospital#age 80"
     ],
     "sparql": "SELECT ?x ?v WHERE { ?x rdf:type/rdfs:subClassOf* h:Patient ; h:age ?v } ORDER BY DESC(?v) LIMIT 1",
-    "seconds": 0.059
+    "seconds": 0.149
   },
   {
     "id": 31,
@@ -627,7 +627,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.004
+    "seconds": 0.006
   },
   {
     "id": 32,
@@ -652,7 +652,7 @@
       "http://example.org/hospital#COPD http://example.org/hospital#hasAffectedSystem http://example.org/hospital#RespiratorySystem"
     ],
     "sparql": "SELECT ?d WHERE { ?d h:hasAffectedSystem h:RespiratorySystem }",
-    "seconds": 0.066
+    "seconds": 0.118
   },
   {
     "id": 33,
@@ -671,7 +671,7 @@
       "http://example.org/hospital#p006 http://example.org/hospital#allergicTo http://example.org/hospital#Aspirin"
     ],
     "sparql": "SELECT ?p WHERE { ?p h:allergicTo h:Aspirin }",
-    "seconds": 0.064
+    "seconds": 0.093
   },
   {
     "id": 34,
@@ -690,7 +690,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": "SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p HAVING (COUNT(DISTINCT ?d) >= 2)",
-    "seconds": 0.071
+    "seconds": 0.103
   },
   {
     "id": 35,
@@ -710,7 +710,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.051
+    "seconds": 0.14
   },
   {
     "id": 36,
@@ -727,7 +727,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.005
+    "seconds": 0.007
   },
   {
     "id": 37,
@@ -744,7 +744,7 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.054
+    "seconds": 0.103
   },
   {
     "id": 38,
@@ -761,6 +761,6 @@
     "forbidden_matches": [],
     "evidence": [],
     "sparql": null,
-    "seconds": 0.056
+    "seconds": 0.081
   }
 ]

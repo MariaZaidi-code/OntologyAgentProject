@@ -1,0 +1,1716 @@
+@prefix : <http://example.org/hospital#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+#    ONTOLOGY: Hospital Management Ontology (HMO)
+#    Version 1.0.0
+#################################################################
+
+<http://example.org/hospital> a owl:Ontology ;
+    rdfs:label "Hospital Management Ontology"@en ;
+    rdfs:comment "An OWL 2 ontology for hospital management: patients, healthcare workers, departments, diseases, symptoms, treatments, appointments, medical records and insurance."@en ;
+    rdfs:seeAlso "http://example.org/hospital" ;
+    owl:versionInfo "1.0.0" .
+
+#################################################################
+#    CLASSES
+#################################################################
+
+### Top level
+:Person a owl:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A human being."@en .
+
+:Patient a owl:Class ;
+    rdfs:label "Patient"@en ;
+    rdfs:comment "A person who receives medical care."@en ;
+    rdfs:subClassOf :Person ;
+    owl:disjointWith :HealthcareWorker .
+
+:HealthcareWorker a owl:Class ;
+    rdfs:label "Healthcare Worker"@en ;
+    rdfs:comment "A person who works in a healthcare organisation."@en ;
+    rdfs:subClassOf :Person .
+
+:Doctor a owl:Class ;
+    rdfs:label "Doctor"@en ;
+    rdfs:comment "A physician licensed to practise medicine."@en ;
+    rdfs:subClassOf :HealthcareWorker ;
+    owl:disjointWith :Nurse ;
+    owl:disjointWith :Pharmacist .
+
+:GeneralPractitioner a owl:Class ;
+    rdfs:label "General Practitioner"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Cardiologist a owl:Class ;
+    rdfs:label "Cardiologist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Neurologist a owl:Class ;
+    rdfs:label "Neurologist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Pulmonologist a owl:Class ;
+    rdfs:label "Pulmonologist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Oncologist a owl:Class ;
+    rdfs:label "Oncologist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Pediatrician a owl:Class ;
+    rdfs:label "Pediatrician"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Orthopedist a owl:Class ;
+    rdfs:label "Orthopedist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Endocrinologist a owl:Class ;
+    rdfs:label "Endocrinologist"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Surgeon a owl:Class ;
+    rdfs:label "Surgeon"@en ;
+    rdfs:subClassOf :Doctor .
+
+:Nurse a owl:Class ;
+    rdfs:label "Nurse"@en ;
+    rdfs:subClassOf :HealthcareWorker .
+
+:Pharmacist a owl:Class ;
+    rdfs:label "Pharmacist"@en ;
+    rdfs:subClassOf :HealthcareWorker .
+
+### Organisations
+:Organization a owl:Class ;
+    rdfs:label "Organization"@en .
+
+:Hospital a owl:Class ;
+    rdfs:label "Hospital"@en ;
+    rdfs:subClassOf :Organization .
+
+:Department a owl:Class ;
+    rdfs:label "Department"@en ;
+    rdfs:comment "A clinical department inside a hospital."@en ;
+    rdfs:subClassOf :Organization .
+
+:Ward a owl:Class ;
+    rdfs:label "Ward"@en ;
+    rdfs:comment "A group of beds inside a department."@en ;
+    rdfs:subClassOf :Organization .
+
+:Pharmacy a owl:Class ;
+    rdfs:label "Pharmacy"@en ;
+    rdfs:subClassOf :Organization .
+
+### Medical concepts
+:Disease a owl:Class ;
+    rdfs:label "Disease"@en ;
+    rdfs:comment "A disorder of structure or function."@en ;
+    owl:disjointWith :Symptom ;
+    owl:disjointWith :Medication ;
+    owl:disjointWith :BodySystem .
+
+:ChronicDisease a owl:Class ;
+    rdfs:label "Chronic Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:AcuteDisease a owl:Class ;
+    rdfs:label "Acute Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:InfectiousDisease a owl:Class ;
+    rdfs:label "Infectious Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:CardiovascularDisease a owl:Class ;
+    rdfs:label "Cardiovascular Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:RespiratoryDisease a owl:Class ;
+    rdfs:label "Respiratory Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:NeurologicalDisease a owl:Class ;
+    rdfs:label "Neurological Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:EndocrineDisease a owl:Class ;
+    rdfs:label "Endocrine Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:MusculoskeletalDisease a owl:Class ;
+    rdfs:label "Musculoskeletal Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:OncologicalDisease a owl:Class ;
+    rdfs:label "Oncological Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:DigestiveDisease a owl:Class ;
+    rdfs:label "Digestive Disease"@en ;
+    rdfs:subClassOf :Disease .
+
+:Diabetes a owl:Class ;
+    rdfs:label "Diabetes"@en ;
+    rdfs:comment "A group of metabolic diseases characterised by high blood glucose."@en ;
+    rdfs:subClassOf :ChronicDisease ,
+                     :EndocrineDisease .
+
+:Symptom a owl:Class ;
+    rdfs:label "Symptom"@en ;
+    rdfs:comment "A physical or mental feature indicating a disease."@en .
+
+:BodySystem a owl:Class ;
+    rdfs:label "Body System"@en ;
+    rdfs:comment "An organ system of the human body."@en .
+
+:Treatment a owl:Class ;
+    rdfs:label "Treatment"@en ;
+    rdfs:comment "A method used to cure or manage a disease."@en .
+
+:Medication a owl:Class ;
+    rdfs:label "Medication"@en ;
+    rdfs:subClassOf :Treatment .
+
+:Antibiotic a owl:Class ;
+    rdfs:label "Antibiotic"@en ;
+    rdfs:subClassOf :Medication .
+
+:PainReliever a owl:Class ;
+    rdfs:label "Pain Reliever"@en ;
+    rdfs:subClassOf :Medication .
+
+:Therapy a owl:Class ;
+    rdfs:label "Therapy"@en ;
+    rdfs:subClassOf :Treatment .
+
+:PhysicalTherapy a owl:Class ;
+    rdfs:label "Physical Therapy"@en ;
+    rdfs:subClassOf :Therapy .
+
+:Surgery a owl:Class ;
+    rdfs:label "Surgery"@en ;
+    rdfs:subClassOf :Treatment .
+
+### Records and administration
+:Appointment a owl:Class ;
+    rdfs:label "Appointment"@en ;
+    rdfs:comment "A scheduled meeting between a patient and a doctor."@en .
+
+:MedicalRecord a owl:Class ;
+    rdfs:label "Medical Record"@en ;
+    rdfs:comment "The documented medical history of a patient."@en .
+
+:InsurancePlan a owl:Class ;
+    rdfs:label "Insurance Plan"@en ;
+    rdfs:comment "A health insurance policy that covers treatments."@en .
+
+### Defined (inferred) classes -------------------------------------
+
+:ChronicDiseasePatient a owl:Class ;
+    rdfs:label "Chronic Disease Patient"@en ;
+    rdfs:comment "Patients diagnosed with at least one chronic disease (inferred class)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :diagnosedWith ;
+              owl:someValuesFrom :ChronicDisease ]
+        )
+    ] .
+
+:DiabetesPatient a owl:Class ;
+    rdfs:label "Diabetes Patient"@en ;
+    rdfs:comment "Patients diagnosed with diabetes (inferred class)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :diagnosedWith ;
+              owl:someValuesFrom :Diabetes ]
+        )
+    ] .
+
+:CardiovascularPatient a owl:Class ;
+    rdfs:label "Cardiovascular Patient"@en ;
+    rdfs:comment "Patients diagnosed with at least one cardiovascular disease (inferred class)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :diagnosedWith ;
+              owl:someValuesFrom :CardiovascularDisease ]
+        )
+    ] .
+
+:PatientWithComorbidities a owl:Class ;
+    rdfs:label "Patient With Comorbidities"@en ;
+    rdfs:comment "Patients diagnosed with two or more distinct diseases (inferred class)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :diagnosedWith ;
+              owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+              owl:onClass :Disease ]
+        )
+    ] .
+
+:DepartmentHead a owl:Class ;
+    rdfs:label "Department Head"@en ;
+    rdfs:comment "Doctors who head a department (inferred class)."@en ;
+    rdfs:subClassOf :Doctor ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Doctor
+            [ a owl:Restriction ;
+              owl:onProperty :headOf ;
+              owl:someValuesFrom :Department ]
+        )
+    ] .
+
+:BusyDoctor a owl:Class ;
+    rdfs:label "Busy Doctor"@en ;
+    rdfs:comment "Doctors with two or more scheduled appointments (inferred class)."@en ;
+    rdfs:subClassOf :Doctor ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Doctor
+            [ a owl:Restriction ;
+              owl:onProperty :hasScheduledAppointment ;
+              owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+              owl:onClass :Appointment ]
+        )
+    ] .
+
+:CardiologyPatient a owl:Class ;
+    rdfs:label "Cardiology Patient"@en ;
+    rdfs:comment "Patients who have an appointment with a cardiologist (inferred class)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :hasAppointment ;
+              owl:someValuesFrom [
+                  a owl:Class ;
+                  owl:intersectionOf (
+                      :Appointment
+                      [ a owl:Restriction ;
+                        owl:onProperty :withDoctor ;
+                        owl:someValuesFrom :Cardiologist ]
+                  )
+              ] ]
+        )
+    ] .
+
+:SeniorPatient a owl:Class ;
+    rdfs:label "Senior Patient"@en ;
+    rdfs:comment "Patients aged 65 or older (inferred class, OWL 2 datatype restriction)."@en ;
+    rdfs:subClassOf :Patient ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Patient
+            [ a owl:Restriction ;
+              owl:onProperty :age ;
+              owl:someValuesFrom [
+                  a rdfs:Datatype ;
+                  owl:onDatatype xsd:integer ;
+                  owl:withRestrictions ( [ xsd:minInclusive 65 ] )
+              ] ]
+        )
+    ] .
+
+#################################################################
+#    OBJECT PROPERTIES
+#################################################################
+
+### Patient - symptom / disease
+:hasSymptom a owl:ObjectProperty ;
+    rdfs:label "has symptom"@en ;
+    rdfs:comment "Links a patient to a symptom they experience."@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :Symptom .
+
+:diagnosedWith a owl:ObjectProperty ;
+    rdfs:label "diagnosed with"@en ;
+    rdfs:comment "Links a patient to a disease they have been diagnosed with."@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :Disease .
+
+:affectsPatient a owl:ObjectProperty ;
+    rdfs:label "affects patient"@en ;
+    rdfs:comment "Inverse of diagnosedWith: links a disease to the patients it affects."@en ;
+    owl:inverseOf :diagnosedWith .
+
+:causes a owl:ObjectProperty ;
+    rdfs:label "causes"@en ;
+    rdfs:comment "Links a disease to a symptom it causes."@en ;
+    rdfs:domain :Disease ;
+    rdfs:range :Symptom .
+
+:indicatedBy a owl:ObjectProperty ;
+    rdfs:label "indicated by"@en ;
+    rdfs:comment "Inverse of causes: links a symptom to the diseases that cause it."@en ;
+    owl:inverseOf :causes .
+
+:hasAffectedSystem a owl:ObjectProperty ;
+    rdfs:label "has affected system"@en ;
+    rdfs:comment "Links a disease to the body system it affects."@en ;
+    rdfs:domain :Disease ;
+    rdfs:range :BodySystem .
+
+### Patient - healthcare worker
+:treatedBy a owl:ObjectProperty ;
+    rdfs:label "treated by"@en ;
+    rdfs:comment "Links a patient to the doctor treating them."@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :Doctor .
+
+:treatsPatient a owl:ObjectProperty ;
+    rdfs:label "treats patient"@en ;
+    rdfs:comment "Inverse of treatedBy: links a doctor to the patients they treat."@en ;
+    owl:inverseOf :treatedBy .
+
+:treatsDisease a owl:ObjectProperty ;
+    rdfs:label "treats disease"@en ;
+    rdfs:comment "Links a healthcare worker to a disease they treat."@en ;
+    rdfs:domain :HealthcareWorker ;
+    rdfs:range :Disease .
+
+### Organisational structure
+:worksIn a owl:ObjectProperty ;
+    rdfs:label "works in"@en ;
+    rdfs:comment "Links a healthcare worker to the department they work in."@en ;
+    rdfs:domain :HealthcareWorker ;
+    rdfs:range :Department .
+
+:headOf a owl:ObjectProperty ;
+    rdfs:label "head of"@en ;
+    rdfs:comment "Links a doctor to the department they head."@en ;
+    rdfs:domain :Doctor ;
+    rdfs:range :Department .
+
+:affiliatedWith a owl:ObjectProperty ;
+    rdfs:label "affiliated with"@en ;
+    rdfs:comment "Links a doctor to the hospital they are affiliated with."@en ;
+    rdfs:domain :Doctor ;
+    rdfs:range :Hospital .
+
+:partOf a owl:ObjectProperty ;
+    rdfs:label "part of"@en ;
+    rdfs:comment "Transitive: links a ward to a department or a department to a hospital."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( :Department :Ward ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( :Hospital :Department ) ] ;
+    a owl:TransitiveProperty .
+
+:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "Inverse of partOf."@en ;
+    owl:inverseOf :partOf .
+
+### Appointments
+:forPatient a owl:ObjectProperty ;
+    rdfs:label "for patient"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range :Patient .
+
+:hasAppointment a owl:ObjectProperty ;
+    rdfs:label "has appointment"@en ;
+    rdfs:comment "Inverse of forPatient."@en ;
+    owl:inverseOf :forPatient .
+
+:withDoctor a owl:ObjectProperty ;
+    rdfs:label "with doctor"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range :Doctor .
+
+:hasScheduledAppointment a owl:ObjectProperty ;
+    rdfs:label "has scheduled appointment"@en ;
+    rdfs:comment "Inverse of withDoctor."@en ;
+    owl:inverseOf :withDoctor .
+
+### Medical records
+:hasMedicalRecord a owl:ObjectProperty ;
+    rdfs:label "has medical record"@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :MedicalRecord .
+
+:recordsDiagnosis a owl:ObjectProperty ;
+    rdfs:label "records diagnosis"@en ;
+    rdfs:domain :MedicalRecord ;
+    rdfs:range :Disease .
+
+:hasPrescription a owl:ObjectProperty ;
+    rdfs:label "has prescription"@en ;
+    rdfs:domain :MedicalRecord ;
+    rdfs:range :Medication .
+
+### Medication / treatment
+:treatedWith a owl:ObjectProperty ;
+    rdfs:label "treated with"@en ;
+    rdfs:comment "Links a disease to the treatment used against it."@en ;
+    rdfs:domain :Disease ;
+    rdfs:range :Treatment .
+
+:prescribedFor a owl:ObjectProperty ;
+    rdfs:label "prescribed for"@en ;
+    rdfs:comment "Links a medication to the patient it was prescribed to."@en ;
+    rdfs:domain :Medication ;
+    rdfs:range :Patient .
+
+:prescribedBy a owl:ObjectProperty ;
+    rdfs:label "prescribed by"@en ;
+    rdfs:comment "Links a medication to the doctor who prescribed it."@en ;
+    rdfs:domain :Medication ;
+    rdfs:range :Doctor .
+
+:interactsWith a owl:ObjectProperty ;
+    rdfs:label "interacts with"@en ;
+    rdfs:comment "Symmetric and irreflexive: links two medications that interact."@en ;
+    rdfs:domain :Medication ;
+    rdfs:range :Medication ;
+    a owl:SymmetricProperty , owl:IrreflexiveProperty .
+
+:allergicTo a owl:ObjectProperty ;
+    rdfs:label "allergic to"@en ;
+    rdfs:comment "Links a patient to a medication they are allergic to."@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :Medication .
+
+### Insurance
+:hasInsurance a owl:ObjectProperty ;
+    rdfs:label "has insurance"@en ;
+    rdfs:domain :Patient ;
+    rdfs:range :InsurancePlan .
+
+:coversDisease a owl:ObjectProperty ;
+    rdfs:label "covers disease"@en ;
+    rdfs:domain :InsurancePlan ;
+    rdfs:range :Disease .
+
+#################################################################
+#    DATA PROPERTIES
+#################################################################
+
+:name a owl:DatatypeProperty ;
+    rdfs:label "name"@en ;
+    rdfs:range xsd:string .
+
+:patientId a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "patient ID"@en ;
+    rdfs:domain :Patient ;
+    rdfs:range xsd:string .
+
+:doctorId a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "doctor ID"@en ;
+    rdfs:domain :Doctor ;
+    rdfs:range xsd:string .
+
+:employeeId a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "employee ID"@en ;
+    rdfs:domain :HealthcareWorker ;
+    rdfs:range xsd:string .
+
+:licenseNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "license number"@en ;
+    rdfs:domain :Doctor ;
+    rdfs:range xsd:string .
+
+:specialty a owl:DatatypeProperty ;
+    rdfs:label "specialty"@en ;
+    rdfs:domain :Doctor ;
+    rdfs:range xsd:string .
+
+:age a owl:DatatypeProperty ;
+    rdfs:label "age"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:integer .
+
+:birthDate a owl:DatatypeProperty ;
+    rdfs:label "birth date"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:dateTime .
+
+:gender a owl:DatatypeProperty ;
+    rdfs:label "gender"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:bloodGroup a owl:DatatypeProperty ;
+    rdfs:label "blood group"@en ;
+    rdfs:domain :Patient ;
+    rdfs:range xsd:string .
+
+:phone a owl:DatatypeProperty ;
+    rdfs:label "phone"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:email a owl:DatatypeProperty ;
+    rdfs:label "email"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string .
+
+:severity a owl:DatatypeProperty ;
+    rdfs:label "severity"@en ;
+    rdfs:comment "Symptom severity on a scale from 1 (mild) to 10 (extreme)."@en ;
+    rdfs:domain :Symptom ;
+    rdfs:range xsd:integer .
+
+:roomNumber a owl:DatatypeProperty ;
+    rdfs:label "room number"@en ;
+    rdfs:domain :Ward ;
+    rdfs:range xsd:string .
+
+:appointmentDate a owl:DatatypeProperty ;
+    rdfs:label "appointment date"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range xsd:dateTime .
+
+:appointmentTime a owl:DatatypeProperty ;
+    rdfs:label "appointment time"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range xsd:string .
+
+:reason a owl:DatatypeProperty ;
+    rdfs:label "reason"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range xsd:string .
+
+:status a owl:DatatypeProperty ;
+    rdfs:label "status"@en ;
+    rdfs:domain :Appointment ;
+    rdfs:range xsd:string .
+
+:cost a owl:DatatypeProperty ;
+    rdfs:label "cost"@en ;
+    rdfs:comment "Cost in US dollars."@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( :Appointment :Medication ) ] ;
+    rdfs:range xsd:decimal .
+
+:dosage a owl:DatatypeProperty ;
+    rdfs:label "dosage"@en ;
+    rdfs:domain :Medication ;
+    rdfs:range xsd:string .
+
+:frequency a owl:DatatypeProperty ;
+    rdfs:label "frequency"@en ;
+    rdfs:domain :Medication ;
+    rdfs:range xsd:string .
+
+:recordDate a owl:DatatypeProperty ;
+    rdfs:label "record date"@en ;
+    rdfs:domain :MedicalRecord ;
+    rdfs:range xsd:dateTime .
+
+:policyNumber a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "policy number"@en ;
+    rdfs:domain :InsurancePlan ;
+    rdfs:range xsd:string .
+
+:coveragePercentage a owl:DatatypeProperty ;
+    rdfs:label "coverage percentage"@en ;
+    rdfs:domain :InsurancePlan ;
+    rdfs:range xsd:decimal .
+
+:monthlyPremium a owl:DatatypeProperty ;
+    rdfs:label "monthly premium"@en ;
+    rdfs:domain :InsurancePlan ;
+    rdfs:range xsd:decimal .
+
+:city a owl:DatatypeProperty ;
+    rdfs:label "city"@en ;
+    rdfs:domain :Hospital ;
+    rdfs:range xsd:string .
+
+:address a owl:DatatypeProperty ;
+    rdfs:label "address"@en ;
+    rdfs:domain :Hospital ;
+    rdfs:range xsd:string .
+
+#################################################################
+#    INDIVIDUALS - Organisations
+#################################################################
+
+:hosp_stmary a owl:NamedIndividual , :Hospital ;
+    rdfs:label "St. Mary's Hospital"@en ;
+    :name "St. Mary's Hospital" ;
+    :city "Springfield" ;
+    :address "123 Health Avenue, Springfield" .
+
+:hosp_city a owl:NamedIndividual , :Hospital ;
+    rdfs:label "City General Hospital"@en ;
+    :name "City General Hospital" ;
+    :city "Riverton" ;
+    :address "88 Riverside Drive, Riverton" .
+
+### Departments
+:dept_gp a owl:NamedIndividual , :Department ;
+    rdfs:label "Internal Medicine"@en ;
+    :name "Internal Medicine" ;
+    :partOf :hosp_stmary .
+
+:dept_cardio a owl:NamedIndividual , :Department ;
+    rdfs:label "Cardiology"@en ;
+    :name "Cardiology" ;
+    :partOf :hosp_stmary .
+
+:dept_neuro a owl:NamedIndividual , :Department ;
+    rdfs:label "Neurology"@en ;
+    :name "Neurology" ;
+    :partOf :hosp_stmary .
+
+:dept_pulm a owl:NamedIndividual , :Department ;
+    rdfs:label "Pulmonology"@en ;
+    :name "Pulmonology" ;
+    :partOf :hosp_stmary .
+
+:dept_surgery a owl:NamedIndividual , :Department ;
+    rdfs:label "Surgery"@en ;
+    :name "Surgery" ;
+    :partOf :hosp_stmary .
+
+:dept_onco a owl:NamedIndividual , :Department ;
+    rdfs:label "Oncology"@en ;
+    :name "Oncology" ;
+    :partOf :hosp_stmary .
+
+:dept_peds a owl:NamedIndividual , :Department ;
+    rdfs:label "Pediatrics"@en ;
+    :name "Pediatrics" ;
+    :partOf :hosp_stmary .
+
+:dept_ortho a owl:NamedIndividual , :Department ;
+    rdfs:label "Orthopedics"@en ;
+    :name "Orthopedics" ;
+    :partOf :hosp_stmary .
+
+:dept_endo a owl:NamedIndividual , :Department ;
+    rdfs:label "Endocrinology"@en ;
+    :name "Endocrinology" ;
+    :partOf :hosp_stmary .
+
+:dept_emerg a owl:NamedIndividual , :Department ;
+    rdfs:label "Emergency"@en ;
+    :name "Emergency" ;
+    :partOf :hosp_stmary .
+
+:dept_cardio_city a owl:NamedIndividual , :Department ;
+    rdfs:label "Cardiology (City General)"@en ;
+    :name "Cardiology" ;
+    :partOf :hosp_city .
+
+### Wards
+:ward_cardio_icu a owl:NamedIndividual , :Ward ;
+    rdfs:label "Cardiac ICU"@en ;
+    :name "Cardiac ICU" ;
+    :roomNumber "ICU-3" ;
+    :partOf :dept_cardio .
+
+:ward_neuro a owl:NamedIndividual , :Ward ;
+    rdfs:label "Neurology Ward"@en ;
+    :name "Neurology Ward" ;
+    :roomNumber "NW-2" ;
+    :partOf :dept_neuro .
+
+:ward_surgery a owl:NamedIndividual , :Ward ;
+    rdfs:label "Surgical Ward"@en ;
+    :name "Surgical Ward" ;
+    :roomNumber "SW-1" ;
+    :partOf :dept_surgery .
+
+:ward_peds a owl:NamedIndividual , :Ward ;
+    rdfs:label "Pediatric Ward"@en ;
+    :name "Pediatric Ward" ;
+    :roomNumber "PW-4" ;
+    :partOf :dept_peds .
+
+:pharmacy_stmary a owl:NamedIndividual , :Pharmacy ;
+    rdfs:label "St. Mary's Pharmacy"@en ;
+    :name "St. Mary's Pharmacy" ;
+    :partOf :hosp_stmary .
+
+#################################################################
+#    INDIVIDUALS - Healthcare workers
+#################################################################
+
+:d001 a owl:NamedIndividual , :GeneralPractitioner ;
+    rdfs:label "Dr. Alice Chen"@en ;
+    :name "Alice Chen" ;
+    :doctorId "MD-1001" ;
+    :licenseNumber "MD-1001" ;
+    :specialty "Family Medicine" ;
+    :age 56 ;
+    :birthDate "1970-02-10T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :phone "+1-555-0101" ;
+    :email "alice.chen@stmary.example.org" ;
+    :worksIn :dept_gp ;
+    :headOf :dept_gp ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Hypertension , :Type2Diabetes , :Influenza ;
+    :treatsPatient :p001 , :p003 .
+
+:d002 a owl:NamedIndividual , :Cardiologist ;
+    rdfs:label "Dr. Rajesh Patel"@en ;
+    :name "Rajesh Patel" ;
+    :doctorId "MD-1002" ;
+    :licenseNumber "MD-1002" ;
+    :specialty "Interventional Cardiology" ;
+    :age 61 ;
+    :birthDate "1965-01-12T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :phone "+1-555-0102" ;
+    :email "rajesh.patel@stmary.example.org" ;
+    :worksIn :dept_cardio ;
+    :headOf :dept_cardio ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :CoronaryArteryDisease , :Hypertension ;
+    :treatsPatient :p003 .
+
+:d003 a owl:NamedIndividual , :Neurologist ;
+    rdfs:label "Dr. Sarah Johnson"@en ;
+    :name "Sarah Johnson" ;
+    :doctorId "MD-1003" ;
+    :licenseNumber "MD-1003" ;
+    :specialty "Cognitive Neurology" ;
+    :age 54 ;
+    :birthDate "1972-03-05T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :phone "+1-555-0103" ;
+    :email "sarah.johnson@stmary.example.org" ;
+    :worksIn :dept_neuro ;
+    :headOf :dept_neuro ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Migraine , :AlzheimerDisease , :Stroke ;
+    :treatsPatient :p004 , :p009 .
+
+:d004 a owl:NamedIndividual , :Pulmonologist ;
+    rdfs:label "Dr. Michael Smith"@en ;
+    :name "Michael Smith" ;
+    :doctorId "MD-1004" ;
+    :licenseNumber "MD-1004" ;
+    :specialty "Pulmonology" ;
+    :age 58 ;
+    :birthDate "1968-04-18T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :phone "+1-555-0104" ;
+    :email "michael.smith@stmary.example.org" ;
+    :worksIn :dept_pulm ;
+    :headOf :dept_pulm ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Asthma , :Pneumonia , :COPD ;
+    :treatsPatient :p002 , :p005 , :p011 .
+
+:d005 a owl:NamedIndividual , :Surgeon ;
+    rdfs:label "Dr. Emily Davis"@en ;
+    :name "Emily Davis" ;
+    :doctorId "MD-1005" ;
+    :licenseNumber "MD-1005" ;
+    :specialty "General Surgery" ;
+    :age 51 ;
+    :birthDate "1975-05-22T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :phone "+1-555-0105" ;
+    :email "emily.davis@stmary.example.org" ;
+    :worksIn :dept_surgery ;
+    :headOf :dept_surgery ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Appendicitis ;
+    :treatsPatient :p007 .
+
+:d006 a owl:NamedIndividual , :Oncologist ;
+    rdfs:label "Dr. Ahmed Hassan"@en ;
+    :name "Ahmed Hassan" ;
+    :doctorId "MD-1006" ;
+    :licenseNumber "MD-1006" ;
+    :specialty "Medical Oncology" ;
+    :age 57 ;
+    :birthDate "1969-06-30T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :phone "+1-555-0106" ;
+    :email "ahmed.hassan@stmary.example.org" ;
+    :worksIn :dept_onco ;
+    :headOf :dept_onco ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :BreastCancer ;
+    :treatsPatient :p010 .
+
+:d007 a owl:NamedIndividual , :Pediatrician ;
+    rdfs:label "Dr. Laura Kim"@en ;
+    :name "Laura Kim" ;
+    :doctorId "MD-1007" ;
+    :licenseNumber "MD-1007" ;
+    :specialty "Pediatric Endocrinology" ;
+    :age 46 ;
+    :birthDate "1980-07-08T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :phone "+1-555-0107" ;
+    :email "laura.kim@stmary.example.org" ;
+    :worksIn :dept_peds ;
+    :headOf :dept_peds ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Type1Diabetes , :Type2Diabetes ;
+    :treatsPatient :p008 .
+
+:d008 a owl:NamedIndividual , :Orthopedist ;
+    rdfs:label "Dr. Carlos Mendez"@en ;
+    :name "Carlos Mendez" ;
+    :doctorId "MD-1008" ;
+    :licenseNumber "MD-1008" ;
+    :specialty "Orthopedic Surgery" ;
+    :age 53 ;
+    :birthDate "1973-08-14T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :phone "+1-555-0108" ;
+    :email "carlos.mendez@stmary.example.org" ;
+    :worksIn :dept_ortho ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Osteoarthritis ;
+    :treatsPatient :p006 .
+
+:d009 a owl:NamedIndividual , :Endocrinologist ;
+    rdfs:label "Dr. Nina Rossi"@en ;
+    :name "Nina Rossi" ;
+    :doctorId "MD-1009" ;
+    :licenseNumber "MD-1009" ;
+    :specialty "Endocrinology" ;
+    :age 50 ;
+    :birthDate "1976-09-25T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :phone "+1-555-0109" ;
+    :email "nina.rossi@stmary.example.org" ;
+    :worksIn :dept_endo ;
+    :headOf :dept_endo ;
+    :affiliatedWith :hosp_stmary ;
+    :treatsDisease :Type1Diabetes , :Type2Diabetes ;
+    :treatsPatient :p001 , :p008 .
+
+:d010 a owl:NamedIndividual , :Cardiologist ;
+    rdfs:label "Dr. James Wilson"@en ;
+    :name "James Wilson" ;
+    :doctorId "MD-1010" ;
+    :licenseNumber "MD-1010" ;
+    :specialty "Cardiology" ;
+    :age 55 ;
+    :birthDate "1971-10-11T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :phone "+1-555-0110" ;
+    :email "james.wilson@citygeneral.example.org" ;
+    :worksIn :dept_cardio_city ;
+    :affiliatedWith :hosp_city ;
+    :treatsDisease :CoronaryArteryDisease , :Hypertension ;
+    :treatsPatient :p012 .
+
+:n001 a owl:NamedIndividual , :Nurse ;
+    rdfs:label "Nurse Grace Park"@en ;
+    :name "Grace Park" ;
+    :employeeId "RN-2001" ;
+    :age 38 ;
+    :gender "female" ;
+    :worksIn :dept_cardio .
+
+:n002 a owl:NamedIndividual , :Nurse ;
+    rdfs:label "Nurse Peter Evans"@en ;
+    :name "Peter Evans" ;
+    :employeeId "RN-2002" ;
+    :age 44 ;
+    :gender "male" ;
+    :worksIn :dept_emerg .
+
+:n003 a owl:NamedIndividual , :Nurse ;
+    rdfs:label "Nurse Fatima Noor"@en ;
+    :name "Fatima Noor" ;
+    :employeeId "RN-3003" ;
+    :age 31 ;
+    :gender "female" ;
+    :worksIn :dept_peds .
+
+:n004 a owl:NamedIndividual , :Nurse ;
+    rdfs:label "Nurse Lucas Brown"@en ;
+    :name "Lucas Brown" ;
+    :employeeId "RN-4004" ;
+    :age 29 ;
+    :gender "male" ;
+    :worksIn :dept_cardio_city .
+
+:ph001 a owl:NamedIndividual , :Pharmacist ;
+    rdfs:label "Pharmacist Omar Farooq"@en ;
+    :name "Omar Farooq" ;
+    :employeeId "PH-5005" ;
+    :age 41 ;
+    :gender "male" ;
+    :worksIn :dept_gp .
+
+#################################################################
+#    INDIVIDUALS - Patients
+#################################################################
+
+:p001 a owl:NamedIndividual , :Patient ;
+    rdfs:label "John Miller"@en ;
+    :name "John Miller" ;
+    :patientId "P-1001" ;
+    :age 68 ;
+    :birthDate "1958-03-14T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "O+" ;
+    :phone "+1-555-1001" ;
+    :email "john.miller@example.com" ;
+    :diagnosedWith :Type2Diabetes , :Hypertension ;
+    :hasSymptom :Fatigue , :ExcessiveThirst , :FrequentUrination ;
+    :treatedBy :d001 , :d009 ;
+    :hasInsurance :ins_bluecare ;
+    :hasMedicalRecord :mr001 ;
+    :hasAppointment :apt001 , :apt002 .
+
+:p002 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Emma Wilson"@en ;
+    :name "Emma Wilson" ;
+    :patientId "P-1002" ;
+    :age 34 ;
+    :birthDate "1992-07-02T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :bloodGroup "A+" ;
+    :phone "+1-555-1002" ;
+    :email "emma.wilson@example.com" ;
+    :diagnosedWith :Asthma ;
+    :hasSymptom :ShortnessOfBreath , :Wheezing ;
+    :treatedBy :d004 ;
+    :hasInsurance :ins_healthplus ;
+    :hasAppointment :apt003 ;
+    :allergicTo :Ibuprofen .
+
+:p003 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Robert Brown"@en ;
+    :name "Robert Brown" ;
+    :patientId "P-1003" ;
+    :age 72 ;
+    :birthDate "1954-01-20T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "AB+" ;
+    :phone "+1-555-1003" ;
+    :email "robert.brown@example.com" ;
+    :diagnosedWith :CoronaryArteryDisease , :Hypertension ;
+    :hasSymptom :ChestPain , :ShortnessOfBreath , :Fatigue ;
+    :treatedBy :d002 ;
+    :hasInsurance :ins_medigold ;
+    :hasMedicalRecord :mr002 ;
+    :hasAppointment :apt004 .
+
+:p004 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Maria Garcia"@en ;
+    :name "Maria Garcia" ;
+    :patientId "P-1004" ;
+    :age 45 ;
+    :birthDate "1981-05-09T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :bloodGroup "B+" ;
+    :phone "+1-555-1004" ;
+    :email "maria.garcia@example.com" ;
+    :diagnosedWith :Migraine ;
+    :hasSymptom :Headache , :Nausea , :BlurredVision ;
+    :treatedBy :d003 ;
+    :hasInsurance :ins_bluecare ;
+    :hasAppointment :apt005 .
+
+:p005 a owl:NamedIndividual , :Patient ;
+    rdfs:label "David Lee"@en ;
+    :name "David Lee" ;
+    :patientId "P-1005" ;
+    :age 29 ;
+    :birthDate "1997-02-11T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "O-" ;
+    :phone "+1-555-1005" ;
+    :email "david.lee@example.com" ;
+    :diagnosedWith :Pneumonia ;
+    :hasSymptom :Fever , :Cough , :ShortnessOfBreath ;
+    :treatedBy :d004 ;
+    :hasInsurance :ins_healthplus ;
+    :hasMedicalRecord :mr003 ;
+    :hasAppointment :apt006 ;
+    :allergicTo :Penicillin .
+
+:p006 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Sophia Martinez"@en ;
+    :name "Sophia Martinez" ;
+    :patientId "P-1006" ;
+    :age 58 ;
+    :birthDate "1968-08-23T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :bloodGroup "A-" ;
+    :phone "+1-555-1006" ;
+    :email "sophia.martinez@example.com" ;
+    :diagnosedWith :Osteoarthritis ;
+    :hasSymptom :JointPain , :JointStiffness ;
+    :treatedBy :d008 ;
+    :hasInsurance :ins_medigold ;
+    :hasAppointment :apt007 ;
+    :allergicTo :Aspirin .
+
+:p007 a owl:NamedIndividual , :Patient ;
+    rdfs:label "James Taylor"@en ;
+    :name "James Taylor" ;
+    :patientId "P-1007" ;
+    :age 41 ;
+    :birthDate "1985-04-30T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "O+" ;
+    :phone "+1-555-1007" ;
+    :email "james.taylor@example.com" ;
+    :diagnosedWith :Appendicitis ;
+    :hasSymptom :AbdominalPain , :Fever , :Nausea ;
+    :treatedBy :d005 ;
+    :hasInsurance :ins_healthplus ;
+    :hasAppointment :apt008 .
+
+:p008 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Olivia Anderson"@en ;
+    :name "Olivia Anderson" ;
+    :patientId "P-1008" ;
+    :age 8 ;
+    :birthDate "2018-06-15T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :bloodGroup "B+" ;
+    :phone "+1-555-1008" ;
+    :email "olivia.anderson@example.com" ;
+    :diagnosedWith :Type1Diabetes ;
+    :hasSymptom :ExcessiveThirst , :FrequentUrination , :Fatigue ;
+    :treatedBy :d007 , :d009 ;
+    :hasInsurance :ins_healthplus ;
+    :hasMedicalRecord :mr004 ;
+    :hasAppointment :apt009 .
+
+:p009 a owl:NamedIndividual , :Patient ;
+    rdfs:label "William Thomas"@en ;
+    :name "William Thomas" ;
+    :patientId "P-1009" ;
+    :age 80 ;
+    :birthDate "1946-09-03T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "AB-" ;
+    :phone "+1-555-1009" ;
+    :email "william.thomas@example.com" ;
+    :diagnosedWith :AlzheimerDisease , :Stroke ;
+    :hasSymptom :MemoryLoss , :Confusion , :Dizziness ;
+    :treatedBy :d003 ;
+    :hasInsurance :ins_medicareplus ;
+    :hasMedicalRecord :mr005 ;
+    :hasAppointment :apt010 .
+
+:p010 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Ava Jackson"@en ;
+    :name "Ava Jackson" ;
+    :patientId "P-1010" ;
+    :age 52 ;
+    :birthDate "1974-02-01T00:00:00"^^xsd:dateTime ;
+    :gender "female" ;
+    :bloodGroup "A+" ;
+    :phone "+1-555-1010" ;
+    :email "ava.jackson@example.com" ;
+    :diagnosedWith :BreastCancer ;
+    :hasSymptom :Fatigue , :WeightLoss ;
+    :treatedBy :d006 ;
+    :hasInsurance :ins_medigold ;
+    :hasAppointment :apt011 .
+
+:p011 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Noah White"@en ;
+    :name "Noah White" ;
+    :patientId "P-1011" ;
+    :age 63 ;
+    :birthDate "1963-03-17T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "O+" ;
+    :phone "+1-555-1011" ;
+    :email "noah.white@example.com" ;
+    :diagnosedWith :COPD ;
+    :hasSymptom :ShortnessOfBreath , :Cough , :Wheezing ;
+    :treatedBy :d004 ;
+    :hasInsurance :ins_medicareplus ;
+    :hasAppointment :apt012 .
+
+:p012 a owl:NamedIndividual , :Patient ;
+    rdfs:label "Henry Moore"@en ;
+    :name "Henry Moore" ;
+    :patientId "P-1012" ;
+    :age 59 ;
+    :birthDate "1967-10-05T00:00:00"^^xsd:dateTime ;
+    :gender "male" ;
+    :bloodGroup "B+" ;
+    :phone "+1-555-1012" ;
+    :email "henry.moore@example.com" ;
+    :diagnosedWith :CoronaryArteryDisease ;
+    :hasSymptom :ChestPain , :Fatigue ;
+    :treatedBy :d010 ;
+    :hasInsurance :ins_bluecare ;
+    :hasAppointment :apt013 .
+
+#################################################################
+#    INDIVIDUALS - Diseases
+#################################################################
+
+:Type2Diabetes a owl:NamedIndividual , :Diabetes , :ChronicDisease , :EndocrineDisease ;
+    rdfs:label "Type 2 Diabetes"@en ;
+    :hasAffectedSystem :EndocrineSystem ;
+    :causes :ExcessiveThirst , :FrequentUrination , :Fatigue ;
+    :treatedWith :Metformin , :Insulin .
+
+:Type1Diabetes a owl:NamedIndividual , :Diabetes , :ChronicDisease , :EndocrineDisease ;
+    rdfs:label "Type 1 Diabetes"@en ;
+    :hasAffectedSystem :EndocrineSystem ;
+    :causes :ExcessiveThirst , :FrequentUrination , :Fatigue ;
+    :treatedWith :Insulin .
+
+:Hypertension a owl:NamedIndividual , :CardiovascularDisease , :ChronicDisease ;
+    rdfs:label "Hypertension"@en ;
+    :hasAffectedSystem :CardiovascularSystem ;
+    :causes :Headache , :BlurredVision ;
+    :treatedWith :Lisinopril , :Amlodipine .
+
+:CoronaryArteryDisease a owl:NamedIndividual , :CardiovascularDisease ;
+    rdfs:label "Coronary Artery Disease"@en ;
+    :hasAffectedSystem :CardiovascularSystem ;
+    :causes :ChestPain , :ShortnessOfBreath , :Fatigue ;
+    :treatedWith :Aspirin , :Atorvastatin , :Metoprolol .
+
+:Asthma a owl:NamedIndividual , :RespiratoryDisease , :ChronicDisease ;
+    rdfs:label "Asthma"@en ;
+    :hasAffectedSystem :RespiratorySystem ;
+    :causes :Wheezing , :ShortnessOfBreath , :Cough ;
+    :treatedWith :Albuterol .
+
+:Pneumonia a owl:NamedIndividual , :InfectiousDisease , :RespiratoryDisease , :AcuteDisease ;
+    rdfs:label "Pneumonia"@en ;
+    :hasAffectedSystem :RespiratorySystem ;
+    :causes :Fever , :Cough , :ShortnessOfBreath ;
+    :treatedWith :Amoxicillin .
+
+:Migraine a owl:NamedIndividual , :NeurologicalDisease ;
+    rdfs:label "Migraine"@en ;
+    :hasAffectedSystem :NervousSystem ;
+    :causes :Headache , :Nausea , :BlurredVision ;
+    :treatedWith :Sumatriptan , :Ibuprofen .
+
+:Osteoarthritis a owl:NamedIndividual , :MusculoskeletalDisease , :ChronicDisease ;
+    rdfs:label "Osteoarthritis"@en ;
+    :hasAffectedSystem :MusculoskeletalSystem ;
+    :causes :JointPain , :JointStiffness ;
+    :treatedWith :Ibuprofen , :pt_therapy .
+
+:Appendicitis a owl:NamedIndividual , :AcuteDisease , :DigestiveDisease ;
+    rdfs:label "Appendicitis"@en ;
+    :hasAffectedSystem :DigestiveSystem ;
+    :causes :AbdominalPain , :Fever , :Nausea ;
+    :treatedWith :Appendectomy , :Amoxicillin .
+
+:AlzheimerDisease a owl:NamedIndividual , :NeurologicalDisease , :ChronicDisease ;
+    rdfs:label "Alzheimer's Disease"@en ;
+    :hasAffectedSystem :NervousSystem ;
+    :causes :MemoryLoss , :Confusion , :Dizziness ;
+    :treatedWith :Donepezil .
+
+:BreastCancer a owl:NamedIndividual , :OncologicalDisease ;
+    rdfs:label "Breast Cancer"@en ;
+    :hasAffectedSystem :ImmuneSystem ;
+    :causes :Fatigue , :WeightLoss ;
+    :treatedWith :Tamoxifen , :Chemotherapy .
+
+:COPD a owl:NamedIndividual , :RespiratoryDisease , :ChronicDisease ;
+    rdfs:label "COPD"@en ;
+    :hasAffectedSystem :RespiratorySystem ;
+    :causes :ShortnessOfBreath , :Cough , :Wheezing ;
+    :treatedWith :Albuterol , :Tiotropium .
+
+:Stroke a owl:NamedIndividual , :NeurologicalDisease , :AcuteDisease ;
+    rdfs:label "Stroke"@en ;
+    :hasAffectedSystem :NervousSystem ;
+    :causes :Confusion , :Dizziness ;
+    :treatedWith :Aspirin , :pt_therapy .
+
+:Influenza a owl:NamedIndividual , :InfectiousDisease , :RespiratoryDisease , :AcuteDisease ;
+    rdfs:label "Influenza"@en ;
+    :hasAffectedSystem :RespiratorySystem ;
+    :causes :Fever , :Cough , :SoreThroat , :Fatigue ;
+    :treatedWith :Oseltamivir .
+
+#################################################################
+#    INDIVIDUALS - Symptoms
+#################################################################
+
+:Fatigue a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Fatigue"@en ;
+    :severity 6 .
+
+:ExcessiveThirst a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Excessive Thirst"@en ;
+    :severity 5 .
+
+:FrequentUrination a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Frequent Urination"@en ;
+    :severity 4 .
+
+:ChestPain a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Chest Pain"@en ;
+    :severity 8 .
+
+:ShortnessOfBreath a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Shortness of Breath"@en ;
+    :severity 7 .
+
+:Wheezing a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Wheezing"@en ;
+    :severity 5 .
+
+:Headache a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Headache"@en ;
+    :severity 5 .
+
+:Fever a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Fever"@en ;
+    :severity 6 .
+
+:Cough a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Cough"@en ;
+    :severity 4 .
+
+:JointPain a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Joint Pain"@en ;
+    :severity 6 .
+
+:JointStiffness a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Joint Stiffness"@en ;
+    :severity 4 .
+
+:Nausea a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Nausea"@en ;
+    :severity 5 .
+
+:BlurredVision a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Blurred Vision"@en ;
+    :severity 5 .
+
+:MemoryLoss a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Memory Loss"@en ;
+    :severity 7 .
+
+:Confusion a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Confusion"@en ;
+    :severity 7 .
+
+:AbdominalPain a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Abdominal Pain"@en ;
+    :severity 8 .
+
+:SoreThroat a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Sore Throat"@en ;
+    :severity 3 .
+
+:WeightLoss a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Weight Loss"@en ;
+    :severity 5 .
+
+:Dizziness a owl:NamedIndividual , :Symptom ;
+    rdfs:label "Dizziness"@en ;
+    :severity 5 .
+
+#################################################################
+#    INDIVIDUALS - Body systems
+#################################################################
+
+:CardiovascularSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Cardiovascular System"@en .
+:RespiratorySystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Respiratory System"@en .
+:NervousSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Nervous System"@en .
+:EndocrineSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Endocrine System"@en .
+:DigestiveSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Digestive System"@en .
+:MusculoskeletalSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Musculoskeletal System"@en .
+:ImmuneSystem a owl:NamedIndividual , :BodySystem ;
+    rdfs:label "Immune System"@en .
+
+#################################################################
+#    INDIVIDUALS - Treatments and medications
+#################################################################
+
+:Metformin a owl:NamedIndividual , :Medication ;
+    rdfs:label "Metformin"@en ;
+    :dosage "500 mg" ;
+    :frequency "twice daily" ;
+    :cost 12.50 ;
+    :prescribedFor :p001 ;
+    :prescribedBy :d009 .
+
+:Insulin a owl:NamedIndividual , :Medication ;
+    rdfs:label "Insulin"@en ;
+    :dosage "10 units" ;
+    :frequency "before meals" ;
+    :cost 85.00 ;
+    :prescribedFor :p008 ;
+    :prescribedBy :d007 .
+
+:Lisinopril a owl:NamedIndividual , :Medication ;
+    rdfs:label "Lisinopril"@en ;
+    :dosage "10 mg" ;
+    :frequency "once daily" ;
+    :cost 9.80 ;
+    :prescribedBy :d001 .
+
+:Amlodipine a owl:NamedIndividual , :Medication ;
+    rdfs:label "Amlodipine"@en ;
+    :dosage "5 mg" ;
+    :frequency "once daily" ;
+    :cost 11.20 ;
+    :prescribedBy :d001 .
+
+:Aspirin a owl:NamedIndividual , :Medication , :PainReliever ;
+    rdfs:label "Aspirin"@en ;
+    :dosage "81 mg" ;
+    :frequency "once daily" ;
+    :cost 4.50 ;
+    :prescribedFor :p003 ;
+    :prescribedBy :d002 .
+
+:Atorvastatin a owl:NamedIndividual , :Medication ;
+    rdfs:label "Atorvastatin"@en ;
+    :dosage "20 mg" ;
+    :frequency "once daily at night" ;
+    :cost 18.00 ;
+    :prescribedFor :p003 ;
+    :prescribedBy :d002 .
+
+:Metoprolol a owl:NamedIndividual , :Medication ;
+    rdfs:label "Metoprolol"@en ;
+    :dosage "25 mg" ;
+    :frequency "twice daily" ;
+    :cost 10.50 ;
+    :prescribedBy :d002 .
+
+:Albuterol a owl:NamedIndividual , :Medication ;
+    rdfs:label "Albuterol"@en ;
+    :dosage "2 puffs" ;
+    :frequency "as needed" ;
+    :cost 30.00 ;
+    :prescribedBy :d004 .
+
+:Tiotropium a owl:NamedIndividual , :Medication ;
+    rdfs:label "Tiotropium"@en ;
+    :dosage "18 mcg" ;
+    :frequency "once daily" ;
+    :cost 45.00 ;
+    :prescribedBy :d004 .
+
+:Amoxicillin a owl:NamedIndividual , :Medication , :Antibiotic ;
+    rdfs:label "Amoxicillin"@en ;
+    :dosage "500 mg" ;
+    :frequency "three times daily" ;
+    :cost 8.00 ;
+    :prescribedFor :p005 ;
+    :prescribedBy :d004 .
+
+:Penicillin a owl:NamedIndividual , :Medication , :Antibiotic ;
+    rdfs:label "Penicillin"@en ;
+    :dosage "250 mg" ;
+    :frequency "four times daily" ;
+    :cost 6.50 .
+
+:Oseltamivir a owl:NamedIndividual , :Medication ;
+    rdfs:label "Oseltamivir"@en ;
+    :dosage "75 mg" ;
+    :frequency "twice daily" ;
+    :cost 55.00 .
+
+:Ibuprofen a owl:NamedIndividual , :Medication , :PainReliever ;
+    rdfs:label "Ibuprofen"@en ;
+    :dosage "200 mg" ;
+    :frequency "every 6 hours as needed" ;
+    :cost 5.20 ;
+    :prescribedFor :p006 ;
+    :prescribedBy :d008 .
+
+:Sumatriptan a owl:NamedIndividual , :Medication ;
+    rdfs:label "Sumatriptan"@en ;
+    :dosage "50 mg" ;
+    :frequency "at onset of migraine" ;
+    :cost 22.00 ;
+    :prescribedBy :d003 .
+
+:Donepezil a owl:NamedIndividual , :Medication ;
+    rdfs:label "Donepezil"@en ;
+    :dosage "5 mg" ;
+    :frequency "once daily at bedtime" ;
+    :cost 24.00 ;
+    :prescribedFor :p009 ;
+    :prescribedBy :d003 .
+
+:Tamoxifen a owl:NamedIndividual , :Medication ;
+    rdfs:label "Tamoxifen"@en ;
+    :dosage "20 mg" ;
+    :frequency "once daily" ;
+    :cost 40.00 ;
+    :prescribedFor :p010 ;
+    :prescribedBy :d006 .
+
+:pt_therapy a owl:NamedIndividual , :PhysicalTherapy ;
+    rdfs:label "Physical Therapy Session"@en ;
+    :cost 75.00 .
+
+:Appendectomy a owl:NamedIndividual , :Surgery ;
+    rdfs:label "Appendectomy"@en ;
+    :cost 4200.00 .
+
+:Chemotherapy a owl:NamedIndividual , :Treatment ;
+    rdfs:label "Chemotherapy"@en ;
+    :cost 3500.00 .
+
+### Drug interactions (symmetric)
+:Warfarin a owl:NamedIndividual , :Medication ;
+    rdfs:label "Warfarin"@en ;
+    :dosage "5 mg" ;
+    :frequency "once daily" ;
+    :cost 14.00 ;
+    :interactsWith :Ibuprofen , :Aspirin .
+
+#################################################################
+#    INDIVIDUALS - Appointments
+#################################################################
+
+:apt001 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1001"@en ;
+    :forPatient :p001 ;
+    :withDoctor :d001 ;
+    :appointmentDate "2026-11-10T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "09:30" ;
+    :reason "Diabetes follow-up" ;
+    :status "Completed" ;
+    :cost 120.00 .
+
+:apt002 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1002"@en ;
+    :forPatient :p001 ;
+    :withDoctor :d009 ;
+    :appointmentDate "2026-11-18T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "11:00" ;
+    :reason "Endocrinology consult" ;
+    :status "Scheduled" ;
+    :cost 180.00 .
+
+:apt003 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1003"@en ;
+    :forPatient :p002 ;
+    :withDoctor :d004 ;
+    :appointmentDate "2026-11-12T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "10:00" ;
+    :reason "Asthma review" ;
+    :status "Scheduled" ;
+    :cost 140.00 .
+
+:apt004 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1004"@en ;
+    :forPatient :p003 ;
+    :withDoctor :d002 ;
+    :appointmentDate "2026-11-20T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "14:30" ;
+    :reason "Cardiology follow-up" ;
+    :status "Scheduled" ;
+    :cost 220.00 .
+
+:apt005 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1005"@en ;
+    :forPatient :p004 ;
+    :withDoctor :d003 ;
+    :appointmentDate "2026-11-22T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "09:00" ;
+    :reason "Migraine consult" ;
+    :status "Scheduled" ;
+    :cost 200.00 .
+
+:apt006 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1006"@en ;
+    :forPatient :p005 ;
+    :withDoctor :d004 ;
+    :appointmentDate "2026-11-16T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "15:00" ;
+    :reason "Pneumonia follow-up" ;
+    :status "Scheduled" ;
+    :cost 150.00 .
+
+:apt007 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1007"@en ;
+    :forPatient :p006 ;
+    :withDoctor :d008 ;
+    :appointmentDate "2026-11-25T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "11:30" ;
+    :reason "Joint pain assessment" ;
+    :status "Scheduled" ;
+    :cost 160.00 .
+
+:apt008 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1008"@en ;
+    :forPatient :p007 ;
+    :withDoctor :d005 ;
+    :appointmentDate "2026-11-17T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "08:00" ;
+    :reason "Pre-operative assessment" ;
+    :status "Scheduled" ;
+    :cost 250.00 .
+
+:apt009 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1009"@en ;
+    :forPatient :p008 ;
+    :withDoctor :d007 ;
+    :appointmentDate "2026-11-19T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "13:00" ;
+    :reason "Pediatric diabetes review" ;
+    :status "Scheduled" ;
+    :cost 170.00 .
+
+:apt010 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1010"@en ;
+    :forPatient :p009 ;
+    :withDoctor :d003 ;
+    :appointmentDate "2026-11-24T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "10:30" ;
+    :reason "Cognitive assessment" ;
+    :status "Scheduled" ;
+    :cost 230.00 .
+
+:apt011 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1011"@en ;
+    :forPatient :p010 ;
+    :withDoctor :d006 ;
+    :appointmentDate "2026-11-26T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "14:00" ;
+    :reason "Oncology consult" ;
+    :status "Scheduled" ;
+    :cost 260.00 .
+
+:apt012 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1012"@en ;
+    :forPatient :p011 ;
+    :withDoctor :d004 ;
+    :appointmentDate "2026-11-27T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "09:30" ;
+    :reason "COPD review" ;
+    :status "Scheduled" ;
+    :cost 145.00 .
+
+:apt013 a owl:NamedIndividual , :Appointment ;
+    rdfs:label "Appointment A-1013"@en ;
+    :forPatient :p012 ;
+    :withDoctor :d010 ;
+    :appointmentDate "2026-11-28T00:00:00"^^xsd:dateTime ;
+    :appointmentTime "11:00" ;
+    :reason "Cardiology consult" ;
+    :status "Scheduled" ;
+    :cost 210.00 .
+
+#################################################################
+#    INDIVIDUALS - Medical records
+#################################################################
+
+:mr001 a owl:NamedIndividual , :MedicalRecord ;
+    rdfs:label "Medical Record MR-0001"@en ;
+    :recordDate "2026-10-30T00:00:00"^^xsd:dateTime ;
+    :recordsDiagnosis :Type2Diabetes , :Hypertension ;
+    :hasPrescription :Metformin .
+
+:mr002 a owl:NamedIndividual , :MedicalRecord ;
+    rdfs:label "Medical Record MR-0002"@en ;
+    :recordDate "2026-10-15T00:00:00"^^xsd:dateTime ;
+    :recordsDiagnosis :CoronaryArteryDisease ;
+    :hasPrescription :Aspirin , :Atorvastatin .
+
+:mr003 a owl:NamedIndividual , :MedicalRecord ;
+    rdfs:label "Medical Record MR-0003"@en ;
+    :recordDate "2026-11-05T00:00:00"^^xsd:dateTime ;
+    :recordsDiagnosis :Pneumonia ;
+    :hasPrescription :Amoxicillin .
+
+:mr004 a owl:NamedIndividual , :MedicalRecord ;
+    rdfs:label "Medical Record MR-0004"@en ;
+    :recordDate "2026-09-12T00:00:00"^^xsd:dateTime ;
+    :recordsDiagnosis :Type1Diabetes ;
+    :hasPrescription :Insulin .
+
+:mr005 a owl:NamedIndividual , :MedicalRecord ;
+    rdfs:label "Medical Record MR-0005"@en ;
+    :recordDate "2026-08-20T00:00:00"^^xsd:dateTime ;
+    :recordsDiagnosis :AlzheimerDisease ;
+    :hasPrescription :Donepezil .
+
+#################################################################
+#    INDIVIDUALS - Insurance plans
+#################################################################
+
+:ins_bluecare a owl:NamedIndividual , :InsurancePlan ;
+    rdfs:label "BlueCare"@en ;
+    :name "BlueCare" ;
+    :policyNumber "BC-7781" ;
+    :coveragePercentage 80.0 ;
+    :monthlyPremium 250.00 ;
+    :coversDisease :Type2Diabetes , :Hypertension , :Migraine , :CoronaryArteryDisease .
+
+:ins_medigold a owl:NamedIndividual , :InsurancePlan ;
+    rdfs:label "MediGold"@en ;
+    :name "MediGold" ;
+    :policyNumber "MG-4412" ;
+    :coveragePercentage 90.0 ;
+    :monthlyPremium 320.00 ;
+    :coversDisease :CoronaryArteryDisease , :BreastCancer , :Osteoarthritis .
+
+:ins_healthplus a owl:NamedIndividual , :InsurancePlan ;
+    rdfs:label "HealthPlus"@en ;
+    :name "HealthPlus" ;
+    :policyNumber "HP-9901" ;
+    :coveragePercentage 75.0 ;
+    :monthlyPremium 210.00 ;
+    :coversDisease :Asthma , :Pneumonia , :Type1Diabetes .
+
+:ins_medicareplus a owl:NamedIndividual , :InsurancePlan ;
+    rdfs:label "MedicarePlus"@en ;
+    :name "MedicarePlus" ;
+    :policyNumber "MP-3345" ;
+    :coveragePercentage 85.0 ;
+    :monthlyPremium 180.00 ;
+    :coversDisease :COPD , :AlzheimerDisease , :CoronaryArteryDisease .
+
+#################################################################
+#    DISTINCTNESS (needed because OWL makes no unique name assumption)
+#################################################################
+
+:DiseaseAllDifferent a owl:AllDifferent ;
+    owl:members ( :Type2Diabetes :Type1Diabetes :Hypertension :CoronaryArteryDisease
+                  :Asthma :Pneumonia :Migraine :Osteoarthritis :Appendicitis
+                  :AlzheimerDisease :BreastCancer :COPD :Stroke :Influenza ) .
+
+:PatientAllDifferent a owl:AllDifferent ;
+    owl:members ( :p001 :p002 :p003 :p004 :p005 :p006 :p007 :p008 :p009 :p010 :p011 :p012 ) .
+
+:MedicationAllDifferent a owl:AllDifferent ;
+    owl:members ( :Metformin :Insulin :Lisinopril :Amlodipine :Aspirin :Atorvastatin
+                  :Metoprolol :Albuterol :Tiotropium :Amoxicillin :Penicillin
+                  :Oseltamivir :Ibuprofen :Sumatriptan :Donepezil :Tamoxifen :Warfarin ) .

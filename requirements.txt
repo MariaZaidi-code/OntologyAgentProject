@@ -1,0 +1,4 @@
+rdflib==7.6.0
+owlready2==0.51
+streamlit==1.66.1
+pytest==9.0.3

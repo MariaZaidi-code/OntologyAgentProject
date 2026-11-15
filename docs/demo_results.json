@@ -1,0 +1,766 @@
+[
+  {
+    "id": 1,
+    "category": "entity lookup",
+    "question": "Who is John Miller?",
+    "answer": "**John Miller** (`p001`) — Patient\n- Patient ID: P-1001\n- Age: 68\n- Gender: male\n- Blood group: O+\n- Phone: +1-555-1001\n- Diagnoses: Type 2 Diabetes and Hypertension\n- Symptoms: Fatigue, Excessive Thirst, and Frequent Urination\n- Treated by: Dr. Alice Chen and Dr. Nina Rossi\n- Insurance: BlueCare\n- Appointments: 2\n- Medications: Metformin\n- Inferred by HermiT: Patient With Comorbidities, Diabetes Patient, Cardiovascular Patient, and Senior Patient",
+    "intent": "individual_description",
+    "confidence": 0.99,
+    "ok": true,
+    "expected_facts": [
+      "John Miller",
+      "P-1001",
+      "Type 2 Diabetes",
+      "Hypertension",
+      "O+",
+      "Dr. Alice Chen"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p001 http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.w3.org/2002/07/owl#NamedIndividual",
+      "http://example.org/hospital#p001 http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://example.org/hospital#Patient",
+      "http://example.org/hospital#p001 http://www.w3.org/2000/01/rdf-schema#label John Miller",
+      "http://example.org/hospital#p001 http://example.org/hospital#name John Miller",
+      "http://example.org/hospital#p001 http://example.org/hospital#patientId P-1001",
+      "http://example.org/hospital#p001 http://example.org/hospital#age 68"
+    ],
+    "sparql": "SELECT ?p ?o WHERE { h:p001 ?p ?o }",
+    "seconds": 3.109
+  },
+  {
+    "id": 2,
+    "category": "entity lookup",
+    "question": "Who is Dr. Emily Davis?",
+    "answer": "**Dr. Emily Davis** (`d005`) — Surgeon\n- Doctor ID: MD-1005\n- Specialty: General Surgery\n- License: MD-1005\n- Phone: +1-555-0105\n- Email: emily.davis@stmary.example.org\n- Works in: Surgery (St. Mary's Hospital)\n- Treats patients: James Taylor\n- Treats diseases: Appendicitis\n- Head of: Surgery\n- Inferred by HermiT: Department Head",
+    "intent": "individual_description",
+    "confidence": 0.99,
+    "ok": true,
+    "expected_facts": [
+      "Surgeon",
+      "Surgery",
+      "Appendicitis",
+      "James Taylor"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#d005 http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://www.w3.org/2002/07/owl#NamedIndividual",
+      "http://example.org/hospital#d005 http://www.w3.org/1999/02/22-rdf-syntax-ns#type http://example.org/hospital#Surgeon",
+      "http://example.org/hospital#d005 http://www.w3.org/2000/01/rdf-schema#label Dr. Emily Davis",
+      "http://example.org/hospital#d005 http://example.org/hospital#name Emily Davis",
+      "http://example.org/hospital#d005 http://example.org/hospital#doctorId MD-1005",
+      "http://example.org/hospital#d005 http://example.org/hospital#licenseNumber MD-1005"
+    ],
+    "sparql": "SELECT ?p ?o WHERE { h:d005 ?p ?o }",
+    "seconds": 0.068
+  },
+  {
+    "id": 3,
+    "category": "class query",
+    "question": "What is a Cardiologist?",
+    "answer": "**Cardiologist**\n- Subclass of: Doctor\n- Individuals: 2 (e.g. Dr. James Wilson and Dr. Rajesh Patel)",
+    "intent": "class_description",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Cardiologist",
+      "Doctor",
+      "Dr. Rajesh Patel"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.082
+  },
+  {
+    "id": 4,
+    "category": "class query",
+    "question": "List all subclasses of Doctor.",
+    "answer": "**All subclasses of Doctor**\n- Busy Doctor\n- Cardiologist\n- Department Head\n- Endocrinologist\n- General Practitioner\n- Neurologist\n- Oncologist\n- Orthopedist\n- Pediatrician\n- Pulmonologist\n- Surgeon",
+    "intent": "subclasses",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "Cardiologist",
+      "Surgeon",
+      "Neurologist",
+      "General Practitioner"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": "SELECT ?c WHERE { ?c rdfs:subClassOf+ h:Doctor }",
+    "seconds": 0.074
+  },
+  {
+    "id": 5,
+    "category": "class hierarchy",
+    "question": "Is Pneumonia a subclass of Disease?",
+    "answer": "**Yes.** Pneumonia is a Disease — its recorded types (Infectious Disease, Respiratory Disease, and Acute Disease) are subclasses of Disease.",
+    "intent": "subclass_check",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "Yes",
+      "Pneumonia",
+      "Disease"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": "ASK { h:Pneumonia rdf:type/rdfs:subClassOf* h:Disease }",
+    "seconds": 0.013
+  },
+  {
+    "id": 6,
+    "category": "class instances",
+    "question": "List all chronic diseases.",
+    "answer": "**Chronic Disease** individuals (7):\n- Alzheimer's Disease (`AlzheimerDisease`)\n- Asthma (`Asthma`)\n- COPD (`COPD`)\n- Hypertension (`Hypertension`)\n- Osteoarthritis (`Osteoarthritis`)\n- Type 1 Diabetes (`Type1Diabetes`)\n- Type 2 Diabetes (`Type2Diabetes`)",
+    "intent": "instances",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "Type 2 Diabetes",
+      "Asthma",
+      "COPD",
+      "Alzheimer's Disease"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.006
+  },
+  {
+    "id": 7,
+    "category": "relationship",
+    "question": "Who is the doctor of Robert Brown?",
+    "answer": "**Robert Brown** -> treated by -> Dr. Rajesh Patel.",
+    "intent": "generic_relation",
+    "confidence": 0.9,
+    "ok": true,
+    "expected_facts": [
+      "Robert Brown",
+      "Dr. Rajesh Patel"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
+    ],
+    "sparql": "SELECT ?o WHERE { h:p003 h:treatedBy ?o }",
+    "seconds": 0.194
+  },
+  {
+    "id": 8,
+    "category": "relationship",
+    "question": "Which diseases does Dr. Patel treat?",
+    "answer": "**Dr. Rajesh Patel** treats: Coronary Artery Disease and Hypertension.",
+    "intent": "diseases_treated_by_doctor",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Coronary Artery Disease",
+      "Hypertension"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#d002 http://example.org/hospital#treatsDisease http://example.org/hospital#CoronaryArteryDisease",
+      "http://example.org/hospital#d002 http://example.org/hospital#treatsDisease http://example.org/hospital#Hypertension"
+    ],
+    "sparql": "SELECT ?d WHERE { h:d002 h:treatsDisease ?d }",
+    "seconds": 0.058
+  },
+  {
+    "id": 9,
+    "category": "relationship",
+    "question": "Which patients does Dr. Patel treat?",
+    "answer": "**Dr. Rajesh Patel** treats: Robert Brown.",
+    "intent": "patients_of_doctor",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Robert Brown"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
+    ],
+    "sparql": "SELECT ?p WHERE { ?p h:treatedBy h:d002 }",
+    "seconds": 0.071
+  },
+  {
+    "id": 10,
+    "category": "attribute",
+    "question": "What is John Miller's blood group?",
+    "answer": "**Blood group of John Miller:** **O+**",
+    "intent": "attribute",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "O+"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p001 http://example.org/hospital#bloodGroup O+"
+    ],
+    "sparql": "SELECT ?v WHERE { h:p001 h:bloodGroup ?v }",
+    "seconds": 0.087
+  },
+  {
+    "id": 11,
+    "category": "attribute",
+    "question": "How old is Emma Wilson?",
+    "answer": "**Age of Emma Wilson:** **34**",
+    "intent": "attribute",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "34"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p002 http://example.org/hospital#age 34"
+    ],
+    "sparql": "SELECT ?v WHERE { h:p002 h:age ?v }",
+    "seconds": 0.003
+  },
+  {
+    "id": 12,
+    "category": "attribute",
+    "question": "What is Dr. Patel's license number?",
+    "answer": "**License number of Dr. Rajesh Patel:** **MD-1002**",
+    "intent": "attribute",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "MD-1002"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#d002 http://example.org/hospital#licenseNumber MD-1002"
+    ],
+    "sparql": "SELECT ?v WHERE { h:d002 h:licenseNumber ?v }",
+    "seconds": 0.003
+  },
+  {
+    "id": 13,
+    "category": "attribute",
+    "question": "What is the dosage of Metformin?",
+    "answer": "**Dosage of Metformin:** **500 mg**",
+    "intent": "attribute",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "500 mg"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#Metformin http://example.org/hospital#dosage 500 mg"
+    ],
+    "sparql": "SELECT ?v WHERE { h:Metformin h:dosage ?v }",
+    "seconds": 0.002
+  },
+  {
+    "id": 14,
+    "category": "attribute",
+    "question": "What is the cost of Appointment A-1001?",
+    "answer": "**Cost of Appointment A-1001:** **120.00**",
+    "intent": "attribute",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "120"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#apt001 http://example.org/hospital#cost 120.00"
+    ],
+    "sparql": "SELECT ?v WHERE { h:apt001 h:cost ?v }",
+    "seconds": 0.003
+  },
+  {
+    "id": 15,
+    "category": "multi-hop",
+    "question": "Which symptoms are caused by diseases that John Miller has?",
+    "answer": "John Miller has **Type 2 Diabetes and Hypertension**. Symptoms caused by these diseases: **Excessive Thirst, Frequent Urination, Fatigue, Headache, and Blurred Vision**.",
+    "intent": "symptoms_from_patient_diseases",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "Excessive Thirst",
+      "Frequent Urination",
+      "Headache",
+      "Blurred Vision"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p001 http://example.org/hospital#diagnosedWith http://example.org/hospital#Type2Diabetes",
+      "http://example.org/hospital#p001 http://example.org/hospital#diagnosedWith http://example.org/hospital#Hypertension",
+      "http://example.org/hospital#Type2Diabetes http://example.org/hospital#causes http://example.org/hospital#ExcessiveThirst",
+      "http://example.org/hospital#Type2Diabetes http://example.org/hospital#causes http://example.org/hospital#FrequentUrination",
+      "http://example.org/hospital#Type2Diabetes http://example.org/hospital#causes http://example.org/hospital#Fatigue",
+      "http://example.org/hospital#Hypertension http://example.org/hospital#causes http://example.org/hospital#Headache"
+    ],
+    "sparql": "SELECT DISTINCT ?s WHERE { h:p001 h:diagnosedWith ?d . ?d h:causes ?s }",
+    "seconds": 0.016
+  },
+  {
+    "id": 16,
+    "category": "multi-hop / transitive",
+    "question": "Which hospital does Dr. Patel work at?",
+    "answer": "Dr. Rajesh Patel works in **Cardiology**, which is part of **St. Mary's Hospital**. The doctor is also affiliated with St. Mary's Hospital.",
+    "intent": "hospital_of_doctor",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Cardiology",
+      "St. Mary's Hospital"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#d002 http://example.org/hospital#worksIn http://example.org/hospital#dept_cardio",
+      "http://example.org/hospital#d002 http://example.org/hospital#affiliatedWith http://example.org/hospital#hosp_stmary"
+    ],
+    "sparql": "SELECT ?h WHERE { h:d002 h:worksIn/h:partOf ?h . ?h rdf:type/rdfs:subClassOf* h:Hospital }",
+    "seconds": 0.057
+  },
+  {
+    "id": 17,
+    "category": "multi-hop / transitive",
+    "question": "Which hospital is the Cardiac ICU part of?",
+    "answer": "**Cardiac ICU** is connected to St. Mary's Hospital via: Cardiac ICU -> [part of] Cardiology -> [part of] St. Mary's Hospital.",
+    "intent": "generic_relation",
+    "confidence": 0.85,
+    "ok": true,
+    "expected_facts": [
+      "St. Mary's Hospital"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": "SELECT ?x WHERE { h:ward_cardio_icu h:partOf/h:partOf ?x . ?x rdf:type/rdfs:subClassOf* h:Hospital }",
+    "seconds": 0.314
+  },
+  {
+    "id": 18,
+    "category": "multi-hop",
+    "question": "Which doctors work in departments that are part of City General Hospital?",
+    "answer": "Doctors whose department is part of **City General Hospital**: Dr. James Wilson.",
+    "intent": "workers_in_hospital",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "Dr. James Wilson"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#n004 http://example.org/hospital#worksIn http://example.org/hospital#dept_cardio_city",
+      "http://example.org/hospital#d010 http://example.org/hospital#worksIn http://example.org/hospital#dept_cardio_city"
+    ],
+    "sparql": "SELECT DISTINCT ?w WHERE { ?d h:partOf h:hosp_city . ?w h:worksIn ?d }",
+    "seconds": 0.092
+  },
+  {
+    "id": 19,
+    "category": "multi-hop",
+    "question": "Which insurance plans cover diseases that Robert Brown has?",
+    "answer": "**Robert Brown** is insured by MediGold.\nInsurance plans covering the patient's recorded diseases:\n- MedicarePlus covers Coronary Artery Disease\n- BlueCare covers Coronary Artery Disease and Hypertension\n- MediGold covers Coronary Artery Disease",
+    "intent": "insurance_coverage",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "BlueCare",
+      "MediGold",
+      "Coronary Artery Disease"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#ins_medicareplus http://example.org/hospital#coversDisease http://example.org/hospital#CoronaryArteryDisease",
+      "http://example.org/hospital#ins_bluecare http://example.org/hospital#coversDisease http://example.org/hospital#CoronaryArteryDisease",
+      "http://example.org/hospital#ins_medigold http://example.org/hospital#coversDisease http://example.org/hospital#CoronaryArteryDisease",
+      "http://example.org/hospital#ins_bluecare http://example.org/hospital#coversDisease http://example.org/hospital#Hypertension"
+    ],
+    "sparql": "SELECT ?plan ?d WHERE { h:p003 h:diagnosedWith ?d . ?plan h:coversDisease ?d }",
+    "seconds": 0.077
+  },
+  {
+    "id": 20,
+    "category": "symmetric property",
+    "question": "Which medications interact with Aspirin?",
+    "answer": "**Aspirin** interacts with: Warfarin.",
+    "intent": "drug_interactions",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Warfarin"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith http://example.org/hospital#Warfarin"
+    ],
+    "sparql": "SELECT ?o WHERE { { h:Aspirin h:interactsWith ?o } UNION { ?o h:interactsWith h:Aspirin } }",
+    "seconds": 0.054
+  },
+  {
+    "id": 21,
+    "category": "multi-hop",
+    "question": "Which medications interact with the medication prescribed to Robert Brown?",
+    "answer": "**Robert Brown** takes: Aspirin and Atorvastatin.\n\nRecorded interactions:\n- Aspirin interacts with Warfarin",
+    "intent": "interactions_of_patient_meds",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "Warfarin",
+      "Aspirin"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#Aspirin http://example.org/hospital#interactsWith http://example.org/hospital#Warfarin"
+    ],
+    "sparql": "SELECT ?m ?o WHERE { ?m h:prescribedFor h:p003 . { ?m h:interactsWith ?o } UNION { ?o h:interactsWith ?m } }",
+    "seconds": 0.061
+  },
+  {
+    "id": 22,
+    "category": "inverse property",
+    "question": "Who is the head of the Cardiology department?",
+    "answer": "The head of **Cardiology** is Dr. Rajesh Patel.",
+    "intent": "head_of_department",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Dr. Rajesh Patel"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#d002 http://example.org/hospital#headOf http://example.org/hospital#dept_cardio"
+    ],
+    "sparql": "SELECT ?d WHERE { ?d h:headOf h:dept_cardio }",
+    "seconds": 0.068
+  },
+  {
+    "id": 23,
+    "category": "inverse property",
+    "question": "Which patients are treated by a Cardiologist?",
+    "answer": "Patients treated by a **Cardiologist**: Henry Moore and Robert Brown.",
+    "intent": "patients_by_specialty",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "Robert Brown",
+      "Henry Moore"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p012 http://example.org/hospital#treatedBy http://example.org/hospital#d010",
+      "http://example.org/hospital#p003 http://example.org/hospital#treatedBy http://example.org/hospital#d002"
+    ],
+    "sparql": "SELECT DISTINCT ?p WHERE { ?p h:treatedBy ?d . ?d rdf:type/rdfs:subClassOf* h:Cardiologist }",
+    "seconds": 0.06
+  },
+  {
+    "id": 24,
+    "category": "relationship",
+    "question": "Which patients have appointments with Dr. Michael Smith?",
+    "answer": "Patients with an appointment with **Dr. Michael Smith**: David Lee, Emma Wilson, and Noah White.",
+    "intent": "patients_with_appointment",
+    "confidence": 0.97,
+    "ok": true,
+    "expected_facts": [
+      "David Lee",
+      "Emma Wilson",
+      "Noah White"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p011 http://example.org/hospital#hasAppointment http://example.org/hospital#apt012",
+      "http://example.org/hospital#p002 http://example.org/hospital#hasAppointment http://example.org/hospital#apt003",
+      "http://example.org/hospital#p005 http://example.org/hospital#hasAppointment http://example.org/hospital#apt006"
+    ],
+    "sparql": "SELECT DISTINCT ?p WHERE { ?a h:withDoctor h:d004 . ?a h:forPatient ?p }",
+    "seconds": 0.065
+  },
+  {
+    "id": 25,
+    "category": "aggregation",
+    "question": "How many patients are there?",
+    "answer": "There are **12** patients in the ontology.",
+    "intent": "count_instances",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "12"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.066
+  },
+  {
+    "id": 26,
+    "category": "aggregation",
+    "question": "How many patients have diabetes?",
+    "answer": "**2** patient(s) have a disease of type **Diabetes**.",
+    "intent": "count_patients_with_disease",
+    "confidence": 0.95,
+    "ok": true,
+    "expected_facts": [
+      "2"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.02
+  },
+  {
+    "id": 27,
+    "category": "aggregation",
+    "question": "How many appointments does Dr. Michael Smith have?",
+    "answer": "Dr. Michael Smith has **3** appointments: Appointment A-1003, Appointment A-1006, and Appointment A-1012.",
+    "intent": "count_relation",
+    "confidence": 0.95,
+    "ok": true,
+    "expected_facts": [
+      "3",
+      "A-1003",
+      "A-1006",
+      "A-1012"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.196
+  },
+  {
+    "id": 28,
+    "category": "reasoning",
+    "question": "Which patients are senior patients?",
+    "answer": "**Senior Patient** individuals (3) — inferred by the HermiT reasoner:\n- Robert Brown (`p003`)\n- John Miller (`p001`)\n- William Thomas (`p009`)",
+    "intent": "instances",
+    "confidence": 0.95,
+    "ok": true,
+    "expected_facts": [
+      "John Miller",
+      "Robert Brown",
+      "William Thomas",
+      "inferred"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.119
+  },
+  {
+    "id": 29,
+    "category": "reasoning",
+    "question": "Is John Miller a senior patient?",
+    "answer": "**Yes.** John Miller is a Senior Patient.",
+    "intent": "yes_no",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Yes",
+      "Senior Patient"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.08
+  },
+  {
+    "id": 30,
+    "category": "superlative",
+    "question": "Who is the oldest patient?",
+    "answer": "**William Thomas** is the oldest with value **80**.",
+    "intent": "superlative",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "William Thomas",
+      "80"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p009 http://example.org/hospital#age 80"
+    ],
+    "sparql": "SELECT ?x ?v WHERE { ?x rdf:type/rdfs:subClassOf* h:Patient ; h:age ?v } ORDER BY DESC(?v) LIMIT 1",
+    "seconds": 0.059
+  },
+  {
+    "id": 31,
+    "category": "relationship path",
+    "question": "What is the relationship between John Miller and Dr. Alice Chen?",
+    "answer": "**Relationship path:** John Miller -> [treated by] Dr. Alice Chen\n\nJohn Miller and Dr. Alice Chen are connected through 1 ontology relationship(s).",
+    "intent": "relationship_between",
+    "confidence": 0.95,
+    "ok": true,
+    "expected_facts": [
+      "relationship",
+      "treated by"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.004
+  },
+  {
+    "id": 32,
+    "category": "attribute",
+    "question": "Which diseases affect the respiratory system?",
+    "answer": "Diseases affecting the **Respiratory System**: Asthma, COPD, Influenza, and Pneumonia.",
+    "intent": "diseases_by_system",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Asthma",
+      "Pneumonia",
+      "COPD",
+      "Influenza"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#Pneumonia http://example.org/hospital#hasAffectedSystem http://example.org/hospital#RespiratorySystem",
+      "http://example.org/hospital#Influenza http://example.org/hospital#hasAffectedSystem http://example.org/hospital#RespiratorySystem",
+      "http://example.org/hospital#Asthma http://example.org/hospital#hasAffectedSystem http://example.org/hospital#RespiratorySystem",
+      "http://example.org/hospital#COPD http://example.org/hospital#hasAffectedSystem http://example.org/hospital#RespiratorySystem"
+    ],
+    "sparql": "SELECT ?d WHERE { ?d h:hasAffectedSystem h:RespiratorySystem }",
+    "seconds": 0.066
+  },
+  {
+    "id": 33,
+    "category": "relationship",
+    "question": "Which patients are allergic to Aspirin?",
+    "answer": "Patients allergic to **Aspirin**: Sophia Martinez.",
+    "intent": "patients_allergic",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "Sophia Martinez"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [
+      "http://example.org/hospital#p006 http://example.org/hospital#allergicTo http://example.org/hospital#Aspirin"
+    ],
+    "sparql": "SELECT ?p WHERE { ?p h:allergicTo h:Aspirin }",
+    "seconds": 0.064
+  },
+  {
+    "id": 34,
+    "category": "aggregation",
+    "question": "Which patients have more than one disease?",
+    "answer": "Patients with **2 or more** distinct recorded diseases: Robert Brown (2), John Miller (2), and William Thomas (2).",
+    "intent": "comorbidity_count",
+    "confidence": 0.98,
+    "ok": true,
+    "expected_facts": [
+      "John Miller",
+      "Robert Brown",
+      "William Thomas"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": "SELECT ?p (COUNT(DISTINCT ?d) AS ?n) WHERE { ?p h:diagnosedWith ?d } GROUP BY ?p HAVING (COUNT(DISTINCT ?d) >= 2)",
+    "seconds": 0.071
+  },
+  {
+    "id": 35,
+    "category": "schema",
+    "question": "List all object properties.",
+    "answer": "**Object properties**\n- **affects patient**: Disease -> Patient\n- **affiliated with**: Doctor -> Hospital\n- **allergic to**: Patient -> Medication\n- **causes**: Disease -> Symptom\n- **covers disease**: Insurance Plan -> Disease\n- **diagnosed with**: Patient -> Disease\n- **for patient**: Appointment -> Patient\n- **has affected system**: Disease -> Body System\n- **has appointment**: Patient -> Appointment\n- **has insurance**: Patient -> Insurance Plan\n- **has medical record**: Patient -> Medical Record\n- **has part**: - -> -\n- **has prescription**: Medical Record -> Medication\n- **has scheduled appointment**: Doctor -> Appointment\n- **has symptom**: Patient -> Symptom\n- **head of**: Doctor -> Department\n- **indicated by**: Symptom -> Disease\n- **interacts with**: Medication -> Medication\n- **part of**: - -> -\n- **prescribed by**: Medication -> Doctor\n- **prescribed for**: Medication -> Patient\n- **records diagnosis**: Medical Record -> Disease\n- **treated by**: Patient -> Doctor\n- **treated with**: Disease -> Treatment\n- **treats disease**: Healthcare Worker -> Disease\n- **treats patient**: Doctor -> Patient\n- **with doctor**: Appointment -> Doctor\n- **works in**: Healthcare Worker -> Department",
+    "intent": "list_object_properties",
+    "confidence": 1.0,
+    "ok": true,
+    "expected_facts": [
+      "Object properties",
+      "diagnosed with",
+      "works in",
+      "interacts with"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.051
+  },
+  {
+    "id": 36,
+    "category": "unknown",
+    "question": "What is the capital of France?",
+    "answer": "I could not find an answer to **\"What is the capital of France?\"** in the hospital ontology.\n\nI only answer from facts stored in `hospital_ontology.owl`; I do not guess or invent information. Try asking about patients, doctors, diseases, symptoms, medications, departments, appointments or insurance plans (or type `help`).",
+    "intent": "unknown",
+    "confidence": 0.0,
+    "ok": true,
+    "expected_facts": [
+      "could not find an answer"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.005
+  },
+  {
+    "id": 37,
+    "category": "unknown",
+    "question": "Who is the CEO of Google?",
+    "answer": "I could not find an answer to **\"Who is the CEO of Google?\"** in the hospital ontology.\n\nI only answer from facts stored in `hospital_ontology.owl`; I do not guess or invent information. Try asking about patients, doctors, diseases, symptoms, medications, departments, appointments or insurance plans (or type `help`).",
+    "intent": "unknown",
+    "confidence": 0.0,
+    "ok": true,
+    "expected_facts": [
+      "could not find an answer"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.054
+  },
+  {
+    "id": 38,
+    "category": "unknown",
+    "question": "What is the population of Springfield?",
+    "answer": "I could not find an answer to **\"What is the population of Springfield?\"** in the hospital ontology.\n\nI only answer from facts stored in `hospital_ontology.owl`; I do not guess or invent information. Try asking about patients, doctors, diseases, symptoms, medications, departments, appointments or insurance plans (or type `help`).",
+    "intent": "unknown",
+    "confidence": 0.0,
+    "ok": true,
+    "expected_facts": [
+      "could not find an answer"
+    ],
+    "missing": [],
+    "forbidden_matches": [],
+    "evidence": [],
+    "sparql": null,
+    "seconds": 0.056
+  }
+]

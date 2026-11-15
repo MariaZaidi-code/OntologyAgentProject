@@ -1,0 +1,364 @@
+[
+  {
+    "id": 1,
+    "category": "entity lookup",
+    "question": "Who is John Miller?",
+    "expect": [
+      "John Miller",
+      "P-1001",
+      "Type 2 Diabetes",
+      "Hypertension",
+      "O+",
+      "Dr. Alice Chen"
+    ]
+  },
+  {
+    "id": 2,
+    "category": "entity lookup",
+    "question": "Who is Dr. Emily Davis?",
+    "expect": [
+      "Surgeon",
+      "Surgery",
+      "Appendicitis",
+      "James Taylor"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "class query",
+    "question": "What is a Cardiologist?",
+    "expect": [
+      "Cardiologist",
+      "Doctor",
+      "Dr. Rajesh Patel"
+    ]
+  },
+  {
+    "id": 4,
+    "category": "class query",
+    "question": "List all subclasses of Doctor.",
+    "expect": [
+      "Cardiologist",
+      "Surgeon",
+      "Neurologist",
+      "General Practitioner"
+    ]
+  },
+  {
+    "id": 5,
+    "category": "class hierarchy",
+    "question": "Is Pneumonia a subclass of Disease?",
+    "expect": [
+      "Yes",
+      "Pneumonia",
+      "Disease"
+    ]
+  },
+  {
+    "id": 6,
+    "category": "class instances",
+    "question": "List all chronic diseases.",
+    "expect": [
+      "Type 2 Diabetes",
+      "Asthma",
+      "COPD",
+      "Alzheimer's Disease"
+    ]
+  },
+  {
+    "id": 7,
+    "category": "relationship",
+    "question": "Who is the doctor of Robert Brown?",
+    "expect": [
+      "Robert Brown",
+      "Dr. Rajesh Patel"
+    ]
+  },
+  {
+    "id": 8,
+    "category": "relationship",
+    "question": "Which diseases does Dr. Patel treat?",
+    "expect": [
+      "Coronary Artery Disease",
+      "Hypertension"
+    ]
+  },
+  {
+    "id": 9,
+    "category": "relationship",
+    "question": "Which patients does Dr. Patel treat?",
+    "expect": [
+      "Robert Brown"
+    ]
+  },
+  {
+    "id": 10,
+    "category": "attribute",
+    "question": "What is John Miller's blood group?",
+    "expect": [
+      "O+"
+    ]
+  },
+  {
+    "id": 11,
+    "category": "attribute",
+    "question": "How old is Emma Wilson?",
+    "expect": [
+      "34"
+    ]
+  },
+  {
+    "id": 12,
+    "category": "attribute",
+    "question": "What is Dr. Patel's license number?",
+    "expect": [
+      "MD-1002"
+    ]
+  },
+  {
+    "id": 13,
+    "category": "attribute",
+    "question": "What is the dosage of Metformin?",
+    "expect": [
+      "500 mg"
+    ]
+  },
+  {
+    "id": 14,
+    "category": "attribute",
+    "question": "What is the cost of Appointment A-1001?",
+    "expect": [
+      "120"
+    ]
+  },
+  {
+    "id": 15,
+    "category": "multi-hop",
+    "question": "Which symptoms are caused by diseases that John Miller has?",
+    "expect": [
+      "Excessive Thirst",
+      "Frequent Urination",
+      "Headache",
+      "Blurred Vision"
+    ]
+  },
+  {
+    "id": 16,
+    "category": "multi-hop / transitive",
+    "question": "Which hospital does Dr. Patel work at?",
+    "expect": [
+      "Cardiology",
+      "St. Mary's Hospital"
+    ]
+  },
+  {
+    "id": 17,
+    "category": "multi-hop / transitive",
+    "question": "Which hospital is the Cardiac ICU part of?",
+    "expect": [
+      "St. Mary's Hospital"
+    ]
+  },
+  {
+    "id": 18,
+    "category": "multi-hop",
+    "question": "Which doctors work in departments that are part of City General Hospital?",
+    "expect": [
+      "Dr. James Wilson"
+    ]
+  },
+  {
+    "id": 19,
+    "category": "multi-hop",
+    "question": "Which insurance plans cover diseases that Robert Brown has?",
+    "expect": [
+      "BlueCare",
+      "MediGold",
+      "Coronary Artery Disease"
+    ]
+  },
+  {
+    "id": 20,
+    "category": "symmetric property",
+    "question": "Which medications interact with Aspirin?",
+    "expect": [
+      "Warfarin"
+    ]
+  },
+  {
+    "id": 21,
+    "category": "multi-hop",
+    "question": "Which medications interact with the medication prescribed to Robert Brown?",
+    "expect": [
+      "Warfarin",
+      "Aspirin"
+    ]
+  },
+  {
+    "id": 22,
+    "category": "inverse property",
+    "question": "Who is the head of the Cardiology department?",
+    "expect": [
+      "Dr. Rajesh Patel"
+    ]
+  },
+  {
+    "id": 23,
+    "category": "inverse property",
+    "question": "Which patients are treated by a Cardiologist?",
+    "expect": [
+      "Robert Brown",
+      "Henry Moore"
+    ]
+  },
+  {
+    "id": 24,
+    "category": "relationship",
+    "question": "Which patients have appointments with Dr. Michael Smith?",
+    "expect": [
+      "David Lee",
+      "Emma Wilson",
+      "Noah White"
+    ]
+  },
+  {
+    "id": 25,
+    "category": "aggregation",
+    "question": "How many patients are there?",
+    "expect": [
+      "12"
+    ]
+  },
+  {
+    "id": 26,
+    "category": "aggregation",
+    "question": "How many patients have diabetes?",
+    "expect": [
+      "2"
+    ]
+  },
+  {
+    "id": 27,
+    "category": "aggregation",
+    "question": "How many appointments does Dr. Michael Smith have?",
+    "expect": [
+      "3",
+      "A-1003",
+      "A-1006",
+      "A-1012"
+    ]
+  },
+  {
+    "id": 28,
+    "category": "reasoning",
+    "question": "Which patients are senior patients?",
+    "expect": [
+      "John Miller",
+      "Robert Brown",
+      "William Thomas",
+      "inferred"
+    ]
+  },
+  {
+    "id": 29,
+    "category": "reasoning",
+    "question": "Is John Miller a senior patient?",
+    "expect": [
+      "Yes",
+      "Senior Patient"
+    ]
+  },
+  {
+    "id": 30,
+    "category": "superlative",
+    "question": "Who is the oldest patient?",
+    "expect": [
+      "William Thomas",
+      "80"
+    ]
+  },
+  {
+    "id": 31,
+    "category": "relationship path",
+    "question": "What is the relationship between John Miller and Dr. Alice Chen?",
+    "expect": [
+      "relationship",
+      "treated by"
+    ]
+  },
+  {
+    "id": 32,
+    "category": "attribute",
+    "question": "Which diseases affect the respiratory system?",
+    "expect": [
+      "Asthma",
+      "Pneumonia",
+      "COPD",
+      "Influenza"
+    ]
+  },
+  {
+    "id": 33,
+    "category": "relationship",
+    "question": "Which patients are allergic to Aspirin?",
+    "expect": [
+      "Sophia Martinez"
+    ]
+  },
+  {
+    "id": 34,
+    "category": "aggregation",
+    "question": "Which patients have more than one disease?",
+    "expect": [
+      "John Miller",
+      "Robert Brown",
+      "William Thomas"
+    ]
+  },
+  {
+    "id": 35,
+    "category": "schema",
+    "question": "List all object properties.",
+    "expect": [
+      "Object properties",
+      "diagnosed with",
+      "works in",
+      "interacts with"
+    ]
+  },
+  {
+    "id": 36,
+    "category": "unknown",
+    "question": "What is the capital of France?",
+    "expect": [
+      "could not find an answer"
+    ],
+    "forbid": [
+      "Paris"
+    ]
+  },
+  {
+    "id": 37,
+    "category": "unknown",
+    "question": "Who is the CEO of Google?",
+    "expect": [
+      "could not find an answer"
+    ],
+    "forbid": [
+      "Sundar Pichai",
+      "Pichai"
+    ]
+  },
+  {
+    "id": 38,
+    "category": "unknown",
+    "question": "What is the population of Springfield?",
+    "expect": [
+      "could not find an answer"
+    ],
+    "forbid": [
+      "inhabitants",
+      "population is"
+    ]
+  }
+]
